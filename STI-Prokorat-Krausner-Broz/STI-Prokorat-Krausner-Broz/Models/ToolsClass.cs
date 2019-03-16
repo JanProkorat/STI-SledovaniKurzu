@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace STIProkoratKrausnerBroz.Models
@@ -28,20 +29,37 @@ namespace STIProkoratKrausnerBroz.Models
         public String getExchangeListUrl(string name)
         {
             name = name.ToUpper();
+            String tmpUrl = "";
             switch (name) {
                 case "CNB":
                     return "https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt";
                 case "CSOB":
-                    return "https://www.csob.cz/portal/lide/kurzovni-listek/-/date/kurzy.txt";
+                    tmpUrl = "https://www.kurzy.cz/kurzy-men/kurzovni-listek/nr/csob/D-";
+                    break;
                 case "CS":
-                    return "To Be Done!";
+                    tmpUrl = "https://www.kurzy.cz/kurzy-men/kurzovni-listek/nr/ceska-sporitelna/D-";
+                    break;
                 case "RB":
-                    return "To Be Done!";
+                    tmpUrl = "https://www.kurzy.cz/kurzy-men/kurzovni-listek/nr/raiffeisenbank/D-";
+                    break;
                 case "KB":
-                    return "To Be Done!";
+                    tmpUrl = "https://www.kurzy.cz/kurzy-men/kurzovni-listek/nr/komercni-banka/D-";
+                    break;
                 default:
                     return "Error";
             }
+            //int tmp = (int)(ClockInfoFromSystem.DayOfWeek + 6) % 7;
+            int dayNumberOfWeek = (int)DateTime.Today.DayOfWeek;
+            if (dayNumberOfWeek > 5)
+            {
+                DateTime dat = DateTime.Today.AddDays((dayNumberOfWeek*(-1))+5);
+                tmpUrl = tmpUrl + dat.ToString("dd.MM.yyyy") + "/";
+            }
+            else
+            {
+                tmpUrl = tmpUrl + DateTime.Today.ToString("dd.MM.yyyy") + "/";
+            }
+            return tmpUrl;
 
         }
 
@@ -146,7 +164,30 @@ namespace STIProkoratKrausnerBroz.Models
             }
             WebClient wc = new WebClient();
             String path = startupPath + "tmp-" + bank + "-" + DateTime.Today.ToString("dd-MM-yyyy") + ".txt";
-            wc.DownloadFile(new System.Uri(url), path);
+            string data = "";
+            if (bank.ToLower() == "cnb")
+            {
+                wc.DownloadFile(new System.Uri(url), path);
+                return true;
+            }
+            else if (bank.ToLower() == "kb" || bank.ToLower() == "rb")
+            {
+                data = normalizetoTXTa(parseData(getHTML(url)), bank);
+            } else
+            {
+                data = normalizetoTXTb(parseData(getHTML(url)), bank);
+            }
+
+            if (!File.Exists(path))
+            {
+                File.Create(path).Close();
+                File.WriteAllText(path,data);
+            }
+            else if (File.Exists(path))
+            {
+                File.WriteAllText(path, data);
+            }
+
             return true;
         }
 
@@ -209,6 +250,79 @@ namespace STIProkoratKrausnerBroz.Models
                     Console.WriteLine(dr[dc].ToString());
                 }
             }
+        }
+
+        private string normalizetoTXTa(string data, String Bank)
+        {
+            String[] datas = data.Split('\n');
+            string respond = DateTime.Today.ToString() + Environment.NewLine + Bank + Environment.NewLine + "Nazev;Kod;Pocet;Nakup;Prodej;Stred;Nakup;Prodej;Stred" + Environment.NewLine;
+            for (int i = 8; i < datas.Length - 12; i = i + 12)
+            {
+                respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 6] + ";" + datas[i + 8] + ";" + datas[i + 9] + ";" + datas[i + 10] + Environment.NewLine;
+            }
+            return respond;
+        }
+
+        private string normalizetoTXTb(string data, String Bank)
+        {
+            String[] datas = data.Split('\n');
+            string respond = DateTime.Today.ToString() + Environment.NewLine + Bank + Environment.NewLine + "Nazev;Kod;Pocet;Nakup;Prodej;Stred;Nakup;Prodej;Stred" + Environment.NewLine;
+            for (int i = 8; i < datas.Length - 11; i = i + 11)
+            {
+                respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 3] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 7] + ";" + datas[i + 8] + ";" + datas[i + 9] + Environment.NewLine;
+            }
+
+            return respond;
+        }
+
+
+        private string getHTML(string url)
+        {
+            String data = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = null;
+                if (response.CharacterSet == null)
+                    readStream = new StreamReader(receiveStream);
+                else
+                    if(response.CharacterSet=="windows-1250")
+                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(1250));
+                    else
+                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                data = readStream.ReadToEnd();
+                response.Close();
+                readStream.Close();
+            }
+            return data;
+        }
+
+        private string parseData(string data)
+        {
+            data = Regex.Replace(data, "<script.*?//script>", string.Empty);
+            String[] separators = new String[] { "<table border=\"0\" width=\"660\" cellpadding =\"1\" cellspacing =\"1\" class=\"pd pdw\">",
+                                                    "</table>"};
+            String[] datas = data.Split(separators, StringSplitOptions.None);
+            data = Regex.Replace(datas[1], "<.*?>", string.Empty);
+            data = data.Replace("\r", string.Empty);
+            data = data.Replace("\t", string.Empty);
+            Regex regex = new Regex("[ ]{2,}", RegexOptions.None);
+            data = regex.Replace(data, "\n");
+            data = data.Replace("\n ", "\n");
+            data = data.Replace("&nbsp;", string.Empty);
+
+            regex = new Regex("[\n]{2,}", RegexOptions.None);
+            data = regex.Replace(data, "\n");
+            data = data.Replace("\n", ";");
+            data = data.Replace("; ", "\n");
+            data = data.Replace(" ;", "");
+            data = data.Replace("\n\n", "\n-\n");
+            data = data.Replace("\n\n", "\n-\n");
+            data = data.Replace("\n;", "\n");
+            data = data.Replace(";", "\n");
+            return data;
         }
     }
 }

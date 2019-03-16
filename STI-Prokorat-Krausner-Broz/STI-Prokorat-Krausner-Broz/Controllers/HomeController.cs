@@ -15,9 +15,12 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         {
             ToolsClass t = new ToolsClass();
 
-            String[] bankCodes= new String[2];
+            String[] bankCodes= new String[5];
             bankCodes[0] = "CNB";
             bankCodes[1] = "CSOB";
+            bankCodes[2] = "CS";
+            bankCodes[3] = "RB";
+            bankCodes[4] = "KB";
             int bankCount = 0;
             foreach (String bankCode in bankCodes)
             {
