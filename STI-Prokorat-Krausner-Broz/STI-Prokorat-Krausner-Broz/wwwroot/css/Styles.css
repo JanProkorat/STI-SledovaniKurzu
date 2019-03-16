@@ -1,0 +1,10 @@
+﻿body {
+}
+.bankContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.graphCanvas{
+    width: 45%;
+}

@@ -1,0 +1,45 @@
+﻿@model STIProkoratKrausnerBroz.Models.ToolsClass
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Home Page";
+}
+<div class="bankContainer" id="cnbDiv">
+    <canvas class="graphCanvas" id="cnb-sale-canvas"></canvas>
+</div>
+<div class="bankContainer" id="csobDiv">
+    <canvas class="graphCanvas" id="csob-purchase-canvas"></canvas>
+    <canvas class="graphCanvas" id="csob-sale-canvas"></canvas>
+</div>
+<script type="text/javascript">
+    let bankNames = [];
+    let currenciesSales = [];
+    let currenciesPurchases = [];
+    let dates = [];
+    let currencyName = "@Model.Currencies[0].name";
+    @{
+        foreach(var d in Model.Currencies[0].dates){
+            @:dates.push("@d.date.ToString()");
+            @:var length = 0;
+            foreach(var b in d.banks){
+                @:bankNames.push("@b.name");
+                @:var tmp = [];
+                @:currenciesPurchases.push(tmp);
+                @:currenciesSales.push(tmp);
+
+            }
+            foreach (var b in d.banks){
+
+                    @: currenciesSales[length].push("@b.saleVal");
+                    @: console.log(currenciesSales[length]);
+                    @: currenciesPurchases[length].push("@b.purchaseVal");
+                    @: length++;
+            }
+        }
+
+     }
+        console.log("data" + dates);
+        console.log("banky " + bankNames);
+        console.log("hodnoty "+ currenciesSales);
+    createCurrencyGraph("cnb-sale-canvas", currencyName, bankNames, dates, currenciesSales);
+</script>
+
