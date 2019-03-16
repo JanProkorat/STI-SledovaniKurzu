@@ -72,10 +72,7 @@ namespace STIProkoratKrausnerBroz.Models
                         }
 
                         if (tmpC != null) { //existuje měna
-                            if (tmpC.dates.Any(Date => Date.date.ToString() == myDate) &&
-                             !file.Contains(DateTime.Parse(myDate).ToString("dd-MM-yyyy"))){
-                                myDate = DateTime.Today.ToString("mm.DD.yyyy");
-                            }else if (tmpC.dates.Any(Date => Date.date.ToString() == myDate)){
+                            if (tmpC.dates.Any(Date => Date.date.ToString() == myDate)){
                                 // existuje datum ve měně, přidej do něj novou banku s kurzem
                                 Currencies.Find(Currency => Currency.name == row["kód"].ToString())
                                     .dates.Find(Date => Date.date.ToString() == myDate).
@@ -99,39 +96,6 @@ namespace STIProkoratKrausnerBroz.Models
 
         }
 
-
-        /*Currency c = null;
-                        if (Currencies.Any(Currency => Currency.name == row["kód"].ToString()) &&
-                            Currencies.Any(Currency => Currency.name == row["země"].ToString())){
-                            c = Currencies.Find(Currency => Currency.name == row["kód"].ToString());
-                        }else{
-                            if (monitoredCurrencies.Contains(row["kód"].ToString()))
-                            {
-                                c = new Currency(row["kód"].ToString(), row["země"].ToString());
-                            }
-                        }
-                        if(c != null)
-                        {
-                            Date d;
-                            if (c.dates.Any(Date => Date.date.ToString() == myDate))
-                            {
-                                d = c.dates.Find(Date => Date.date.ToString() == myDate);
-
-                            }
-                            else
-                            {
-
-                                d = new Date(DateTime.ParseExact(myDate, "dd.MM.yyyy", CultureInfo.InvariantCulture));
-
-                            }
-
-                            d.createBank(bankName, 0, 0, formatPlatform(row["kurz"].ToString()), 0);
-                            c.dates.Add(d);
-                            Currencies.Add(c);
-                        }
-
-
-*/
         private DataTable createCurrTable(List<string> lines)
         {
             DataTable dt = new DataTable();
