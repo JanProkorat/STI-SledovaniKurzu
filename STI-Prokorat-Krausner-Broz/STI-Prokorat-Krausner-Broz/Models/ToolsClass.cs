@@ -21,7 +21,7 @@ namespace STIProkoratKrausnerBroz.Models
         public ToolsClass()
         {
             Currencies = new List<Currency>();
-            monitoredCurrencies = new string[] { "AUD", "CNY", "EUR", "HRK", "CAD", "HUF", 
+            monitoredCurrencies = new string[] { "AUD", "CNY", "EUR", "HRK", "CAD", "HUF",
                 "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "TRY", "USD", "GBP"};
         }
 
@@ -50,15 +50,20 @@ namespace STIProkoratKrausnerBroz.Models
             }
             //int tmp = (int)(ClockInfoFromSystem.DayOfWeek + 6) % 7;
             int dayNumberOfWeek = (int)DateTime.Today.DayOfWeek;
-            if (dayNumberOfWeek > 5)
-            {
-                DateTime dat = DateTime.Today.AddDays((dayNumberOfWeek*(-1))+5);
-                tmpUrl = tmpUrl + dat.ToString("dd.MM.yyyy") + "/";
+            DateTime dat;
+            switch (dayNumberOfWeek) {
+                case 6:
+                    dat = DateTime.Today.AddDays(-1);
+                    break;
+                case 0:
+                    dat = DateTime.Today.AddDays(-2);
+                    break;
+                default:
+                    dat = DateTime.Today;
+                    break;
             }
-            else
-            {
-                tmpUrl = tmpUrl + DateTime.Today.ToString("dd.MM.yyyy") + "/";
-            }
+            tmpUrl = tmpUrl + dat.ToString("dd.MM.yyyy") + "/";
+            Console.WriteLine("");
             return tmpUrl;
 
         }
@@ -281,6 +286,8 @@ namespace STIProkoratKrausnerBroz.Models
             String data = "";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //EncodingProvider provider = System.Text.EncodingProvider;
+            //Encoding.RegisterProvider(provider);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 Stream receiveStream = response.GetResponseStream();

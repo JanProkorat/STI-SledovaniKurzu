@@ -5238,9 +5238,10 @@
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.2": {
-      "sha512": "ab4+TZw3Sxqrr5TwrwVyABeQkhSxYMJXgG6yZw7T+r6Vz+hcOt+pK79o15ESG7kZvWAK9wRG7emnTIia5O6R1Q==",
+      "sha512": "fe1+dpy+eM4IX1zodsvkihO1Spuj0NecfStWzvkYoMo7/ziOsqSv4vFK36ZpBfHa4gpdCEwaU46EPzdq+ZDYhQ==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.1.2",
+      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5604,6 +5605,7 @@
       "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
+      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         "ThirdPartyNotices.rtf",
@@ -5841,6 +5843,7 @@
       "sha512": "OYHhKbFNJCSHpkLAKI9yqTx3+SZ7aHKZaCP+G5ctlL/rZm5Y37Ke00abUhp5mFEJlvEueYfOGDx/GjltEs210A==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.tools/2.1.1",
+      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6866,10 +6869,11 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.1.2": {
-      "sha512": "7J7veIH7Mu6zc4llWnM7YRgTv9+Ew+JWkkDj0K7cEe8wuFA6HRt6STtwux2g+qjpDXeYeWsK0UQ3uIgRiTYHIg==",
+      "sha512": "mOJy3M0UN+LUG21dLGMxaWZEP6xYpQEpLuvuEQBaownaX4YuhH6NmNUlN9si+vNkAS6dwJ//N1O4DmLf2CikVg==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.1.2",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -9872,7 +9876,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.2": {
-      "sha512": "k3rsGIl3aG0AJVIxs8z2mTvF4BSFJtkHSYbnhgcdZX9L80Hr5U8/VYHlci26mJz3gZSFX1JjRyEQZhbDnBb4tw==",
+      "sha512": "wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.2",
       "files": [
@@ -10934,10 +10938,11 @@
       ]
     },
     "System.Text.Encoding.CodePages/4.5.1": {
-      "sha512": "Eu3dyUUqDFkuskrrK54VLWC41EVANJNo5vzjojnGAphH+FV63NJg3zs5x0TvRaYDTZ2y+86eIOK43Hg2NXiw7w==",
+      "sha512": "4J2JQXbftjPMppIHJ7IC+VXQ9XfEagN92vZZNoG12i+zReYlim5dMoXFC1Zzg7tsnKDM7JPo5bYfFK4Jheq44w==",
       "type": "package",
       "path": "system.text.encoding.codepages/4.5.1",
       "files": [
+        ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
@@ -11778,28 +11783,30 @@
     ]
   },
   "packageFolders": {
-    "/Users/jan/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\KraukyMan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz.csproj",
+      "projectUniqueName": "C:\\Users\\KraukyMan\\Desktop\\STI_Project\\New\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
       "projectName": "STI-Prokorat-Krausner-Broz",
-      "projectPath": "/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz.csproj",
-      "packagesPath": "/Users/jan/.nuget/packages/",
-      "outputPath": "/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/",
+      "projectPath": "C:\\Users\\KraukyMan\\Desktop\\STI_Project\\New\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+      "packagesPath": "C:\\Users\\KraukyMan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\KraukyMan\\Desktop\\STI_Project\\New\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/jan/.config/NuGet/NuGet.Config"
+        "C:\\Users\\KraukyMan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11844,5 +11851,13 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Při čtení souboru mezipaměti C:\\Users\\KraukyMan\\Desktop\\STI_Project\\New\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\obj\\STI-Prokorat-Krausner-Broz.csproj.nuget.cache došlo k problému: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
