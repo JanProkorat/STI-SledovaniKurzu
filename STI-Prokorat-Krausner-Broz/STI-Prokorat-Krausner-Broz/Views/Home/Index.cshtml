@@ -4,16 +4,28 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="currencyContainer" id="audDiv">
-    <canvas class="graphCanvas" id="aud-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="aud-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="aud-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="aud-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="cnyDiv">
-    <canvas class="graphCanvas" id="cny-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="cny-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="cny-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+            <canvas class="graphCanvas" id="cny-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="eurDiv">
-    <canvas class="graphCanvas" id="eur-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="eur-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="eur-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="eur-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="hrkDiv">
     <canvas class="graphCanvas" id="hrk-purchase-canvas"></canvas>
@@ -99,11 +111,13 @@
                  }
             }
             @:console.log("@c.name.ToLower()"+"-sale-canvas");
-            @:console.log("@c.name.ToLower()");
-            @:createCurrencySaleGraph("@c.name.ToLower()"+"-sale-canvas", "@c.name", bankNames, dates, currenciesSales[currencyIndex]);
+            @:console.log(currenciesSales[currencyIndex]);
+            @:createCurrencySaleGraph("@c.name.ToLower()"+"-sale-canvas", "@c.name", bankNames[0], dates, currenciesSales[currencyIndex]);
+            @:createCurrencyPurchaseGraph("@c.name.ToLower()"+"-purchase-canvas", "@c.name", bankNames[0], dates, currenciesPurchases[currencyIndex]);
             @:currencyIndex++;
         }
      }
+    //createCurrencySaleGraph("aud-sale-canvas", "AUD", bankNames, dates, currenciesSales[0]);
     //console.log(currenciesSales);
     //console.log(currenciesPurchases);
 

@@ -5,6 +5,6 @@
     align-items: center;
     flex-direction: row;
 }
-.graphCanvas{
+.graphCanvasDiv{
     width: 45%;
 }
