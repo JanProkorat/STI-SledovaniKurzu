@@ -286,12 +286,25 @@ namespace STIProkoratKrausnerBroz.Models
                 Stream receiveStream = response.GetResponseStream();
                 StreamReader readStream = null;
                 if (response.CharacterSet == null)
+                {
                     readStream = new StreamReader(receiveStream);
-                else
-                    if(response.CharacterSet=="windows-1250")
-                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(1250));
+                }
+                else {
+                    if (response.CharacterSet == "windows-1250")
+                    { 
+                    /*Encoding srcEncoding = CodePagesEncodingProvider.Instance.GetEncoding(1250);
+                        UnicodeEncoding dstEncoding = new UnicodeEncoding();
+                        byte[] srcBytes = srcEncoding.GetBytes(url);
+                        byte[] dstBytes = dstEncoding.GetBytes(url);
+                        dstEncoding.GetString(dstBytes);
+                        readStream = new StreamReader(receiveStream, dstEncoding);*/
+                        readStream = new StreamReader(receiveStream, CodePagesEncodingProvider.Instance.GetEncoding(1250));
+                    }
                     else
+                    {
                         readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                    }
+                }
                 data = readStream.ReadToEnd();
                 response.Close();
                 readStream.Close();

@@ -66,40 +66,47 @@
 
 <script type="text/javascript">
     let bankNames = [];
+    var numOfcurrencies = @Model.monitoredCurrencies.Length;
     let currenciesSales = [];
-    let currenciesPurchases = [];
+    let currenciesPurchases = new Array(numOfcurrencies);
     let dates = [];
     let currencyNames = [];
+    var i = 0;
+    var j = 0;
     @{
-        foreach(var d in Model.Currencies[0].dates){
+        foreach (var d in Model.Currencies[0].dates) {
             @:dates.push("@d.date.ToString()");
-            @:var tmpArray1 = [];
-            @:var tmpArray2 = [];
-            @:currenciesSales.push(tmpArray1);
-            @:currenciesPurchases.push(tmpArray2);
         }
+     /*}
+    for(var i = 0; i < numOfcurrencies; i++){
+        currenciesSales[i] = new Array(dates.length);
+        currenciesPurchases[i] = new Array(dates.length);
+    }
+    @{*/
         foreach (var b in Model.Currencies[0].dates[0].banks){
             @:bankNames.push("@b.name");
         }
         foreach(var c in Model.Currencies){
             @:currencyNames.push("@c.name");
             foreach(var d in c.dates){
+                @:currenciesSales[i] = [];
                 foreach (var b in d.banks){
-                    @:for(var i = 0; i < currenciesSales.lenght; i++){
-                        @:for(var j = 0; j < 8; j++){
-                            @:currenciesSales[i][j].push("@b.saleVal");
+                    @:currenciesSales[i][j] = "@b.saleVal";
 
-                            @:currenciesPurchases[i][j].push("@b.saleVal");
-                            @:console.log(currenciesPurchases[i][j]);
-                        @:}
+                    @:j++;
+                    @:if(j == dates.length){
+                        @:i++;
+                        @:j = 0;
                     @:}
                  }
+
             }
         }
      }
-    console.log(currencyNames);
     console.log(currenciesSales);
-    console.log(currenciesPurchases);
+    //console.log(currenciesPurchases);
     //createCurrencyGraph("cnb-sale-canvas", currencyName, bankNames, dates, currenciesSales);
 </script>
+
+
 
