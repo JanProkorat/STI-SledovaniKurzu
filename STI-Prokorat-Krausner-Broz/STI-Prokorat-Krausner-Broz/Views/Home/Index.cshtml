@@ -68,44 +68,45 @@
     let bankNames = [];
     var numOfcurrencies = @Model.monitoredCurrencies.Length;
     let currenciesSales = [];
-    let currenciesPurchases = new Array(numOfcurrencies);
+    let currenciesPurchases = [];
     let dates = [];
     let currencyNames = [];
+    var currencyIndex = 0;
     var i = 0;
     var j = 0;
     @{
         foreach (var d in Model.Currencies[0].dates) {
             @:dates.push("@d.date.ToString()");
         }
-     /*}
-    for(var i = 0; i < numOfcurrencies; i++){
-        currenciesSales[i] = new Array(dates.length);
-        currenciesPurchases[i] = new Array(dates.length);
-    }
-    @{*/
         foreach (var b in Model.Currencies[0].dates[0].banks){
             @:bankNames.push("@b.name");
         }
         foreach(var c in Model.Currencies){
             @:currencyNames.push("@c.name");
             foreach(var d in c.dates){
-                @:currenciesSales[i] = [];
+                @:if(currenciesSales.length < 15){
+                    @:currenciesSales.push([]);
+                    @:currenciesPurchases.push([]);
+                @:}
                 foreach (var b in d.banks){
                     @:currenciesSales[i][j] = "@b.saleVal";
-
+                    @:currenciesPurchases[i][j] = "@b.purchaseVal";
                     @:j++;
                     @:if(j == dates.length){
                         @:i++;
                         @:j = 0;
                     @:}
                  }
-
             }
+            @:console.log("@c.name.ToLower()"+"-sale-canvas");
+            @:console.log("@c.name.ToLower()");
+            @:createCurrencySaleGraph("@c.name.ToLower()"+"-sale-canvas", "@c.name", bankNames, dates, currenciesSales[currencyIndex]);
+            @:currencyIndex++;
         }
      }
-    console.log(currenciesSales);
+    //console.log(currenciesSales);
     //console.log(currenciesPurchases);
-    //createCurrencyGraph("cnb-sale-canvas", currencyName, bankNames, dates, currenciesSales);
+
 </script>
 
 

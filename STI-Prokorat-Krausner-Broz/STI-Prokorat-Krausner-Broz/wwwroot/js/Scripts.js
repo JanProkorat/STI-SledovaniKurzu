@@ -99,3 +99,51 @@ function createCurrencyGraph(canvasName, currencyName, bankNames, dates, currenc
     chart.update();
     window.myline = chart;
 }
+
+function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
+    let labels = [];
+    var dateFormat = 'DD/MM/YYYY'; 
+    for(var i in dates){
+        var splitedData = dates[i].split(' ');
+        labels.push(moment(splitedData[0], dateFormat));
+    }
+    var ctx = document.getElementById(canvasName).getContext('2d');
+    var config = {
+        type: 'line',
+        data:{
+            labels: labels
+        },
+        options: {
+            title: {
+                display: true,
+                text: currencyName+': Cena za prodej'
+            }
+            /*scales:{
+                xAxes: [{
+                    type: 'time',
+                    unit: 'day',
+                    unitStepSize: 1,
+                    distribution: 'series',
+                    ticks:{
+                        source: 'labels'
+                    }
+                }],
+                yAxes:[{
+                    display: true,
+                    labelString: 'Hodnota kurzu'
+                }]
+            }*/
+        }
+    };
+    var chart = new Chart(ctx, config);
+    for(let i = 0; i < bankNames.length; i++){
+        chart.data.datasets.push({
+            data: dataArray[i],
+            label: bankNames[i],
+            borderColor: randomColor(),
+            fill: false
+        });
+    }
+    chart.update();
+    window.myline = chart;
+}
