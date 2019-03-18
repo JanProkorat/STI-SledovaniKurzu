@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using STI_Prokorat_Krausner_Broz.Models;
@@ -10,30 +11,15 @@ using STIProkoratKrausnerBroz.Models;
 namespace STI_Prokorat_Krausner_Broz.Controllers
 {
     public class HomeController : Controller
-    { 
-    public IActionResult Index()
-        {
-            ToolsClass t = new ToolsClass();
+    {
+        ToolsClass t = new ToolsClass();
+        Timer timer = null;
+        Timer timerTest = null;
 
-            String[] bankCodes= new String[5];
-            bankCodes[0] = "CNB";
-            bankCodes[1] = "CSOB";
-            bankCodes[2] = "CS";
-            bankCodes[3] = "RB";
-            bankCodes[4] = "KB";
-            int bankCount = 0;
-            foreach (String bankCode in bankCodes)
-            {
-                if (t.getExchangeRatesFileTxt(bankCode, "tmp_files/"))
-                {
-                    ViewBag.Zprava = "Povedlo se stáhnout soubor od " + bankCode;
-                }
-                bankCount++;
-            }
-            if (bankCount == bankCodes.Length)
-            {
-                t.setLastDownload();
-            }
+        public IActionResult Index()
+        {
+            this.downloadTXT();
+            this.setTimerAndStart();
             t.createCurrency("tmp_files/");
             foreach(Currency c in t.Currencies){
                 Console.WriteLine(c.name+" "+c.state);
@@ -57,6 +43,51 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             }
             */
             return View(t);
+        }
+
+        public void setTimerAndStart()
+        {
+            AutoResetEvent autoEvent = new AutoResetEvent(false);
+            timer = new Timer(this.Timer_Elapsed,autoEvent, 3600000,-1);
+
+            timerTest = new Timer(this.TimerTest_Elapsed, autoEvent, 1000, -1);
+
+        }
+
+        public void Timer_Elapsed(Object stateInfo)
+        {
+            downloadTXT();
+        }
+
+        public void TimerTest_Elapsed(Object stateInfo)
+        {
+            Console.WriteLine("Fuck  this shitelapsed!!!!");
+        }
+
+        public void downloadTXT()
+        {
+            String[] bankCodes = new String[5];
+            bankCodes[0] = "CNB";
+            bankCodes[1] = "CSOB";
+            bankCodes[2] = "CS";
+            bankCodes[3] = "RB";
+            bankCodes[4] = "KB";
+            int bankCount = 0;
+            if (!t.testLastDownload())
+            {
+                foreach (String bankCode in bankCodes)
+                {
+                    if (t.getExchangeRatesFileTxt(bankCode, "tmp_files/"))
+                    {
+                        ViewBag.Zprava = "Povedlo se stáhnout soubor od " + bankCode;
+                    }
+                    bankCount++;
+                }
+                if (bankCount == bankCodes.Length)
+                {
+                    t.setLastDownload();
+                }
+            }
         }
 
 

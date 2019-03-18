@@ -1,5 +1,4 @@
-18.03.2019
-rb
+18.03.2019 rb
 země;kód;množství;nakup;prodej;stred;nakup;prodej;stred
 Americký dolar;USD;1;21.953;23.307;-;21.740;23.520;-
 Australský dolar;AUD;1;15.546;16.554;-;15.260;16.840;-

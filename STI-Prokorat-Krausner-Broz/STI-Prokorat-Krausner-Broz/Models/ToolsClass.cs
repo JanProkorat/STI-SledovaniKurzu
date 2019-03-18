@@ -189,10 +189,6 @@ namespace STIProkoratKrausnerBroz.Models
         {
             //Save file from url as tmp-/bank/-/date/.txt
             //return true if download was completed else return false
-            if (testLastDownload())
-            {
-                return true;
-            }
             bank = bank.ToLower();
             String url = getExchangeListUrl(bank);
             if (!testUrlReachable(url))
@@ -262,7 +258,22 @@ namespace STIProkoratKrausnerBroz.Models
             DateTime date = DateTime.Parse(DateTime.Today.ToString().Split("")[0]);
             DateTime tmpDate = getLastDownloadDate();
             int daydiff = (int)((date - tmpDate).TotalDays);
-            return daydiff == 0;
+            int hour = DateTime.Now.Hour;
+            int minute = DateTime.Now.Minute;
+            double time = (double)hour + ((double)minute / 100.0);
+            //Console.WriteLine("Time: " + time.ToString());
+            if (daydiff == 0)
+            {
+                return true;
+            }
+            else if (time > 18.05)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void setLastDownload()
@@ -285,7 +296,7 @@ namespace STIProkoratKrausnerBroz.Models
         private string normalizetoTXTa(string data, String Bank)
         {
             String[] datas = data.Split('\n');
-            string respond = DateTime.Today.ToString("dd.MM.yyyy") + Environment.NewLine + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
+            string respond = DateTime.Today.ToString("dd.MM.yyyy") + " " + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
             for (int i = 8; i < datas.Length - 12; i = i + 12)
             {
                 respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 6] + ";" + datas[i + 8] + ";" + datas[i + 9] + ";" + datas[i + 10] + Environment.NewLine;
@@ -296,7 +307,7 @@ namespace STIProkoratKrausnerBroz.Models
         private string normalizetoTXTb(string data, String Bank)
         {
             String[] datas = data.Split('\n');
-            string respond = DateTime.Today.ToString("dd.MM.yyyy") + Environment.NewLine + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
+            string respond = DateTime.Today.ToString("dd.MM.yyyy") + " " + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
             for (int i = 8; i < datas.Length - 11; i = i + 11)
             {
                 respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 3] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 7] + ";" + datas[i + 8] + ";" + datas[i + 9] + Environment.NewLine;
