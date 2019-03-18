@@ -20,9 +20,9 @@ namespace STIProkoratKrausnerBroz.Models
             this.date = new DateTime();
         }
 
-        public void createBank(string name, double change, double purchase, double sale, double center)
+        public void createBank(string name, double purchase, double sale, double center)
         {
-            banks.Add(new Bank(name, change, purchase, sale, center));
+            banks.Add(new Bank(name, purchase, sale, center));
         }
     }
 }

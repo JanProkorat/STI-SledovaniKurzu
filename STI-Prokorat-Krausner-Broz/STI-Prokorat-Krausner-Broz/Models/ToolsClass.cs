@@ -72,54 +72,77 @@ namespace STIProkoratKrausnerBroz.Models
         {
             foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt"))
             {
-                if (file.Contains("cnb"))
-                {
-                    List<string> lines = File.ReadAllLines(file).ToList();
-                    string myDate = lines[0].Split(" ")[0];
-                    string bankName = "cnb";
-                    DataTable dt = createCurrTable(lines);
-                    //displayTable(dt);
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        Currency tmpC = null;
-                        Currency c = null;
-                        Date d = null;
-                        if (Currencies.Any(Currency => Currency.name == row["kód"].ToString()))
-                        {
-                            // v seznamu existuje měna s daným kódem
-                            tmpC = Currencies.Find(Currency => Currency.name == row["kód"].ToString());
+                List<string> lines = File.ReadAllLines(file).ToList();
+                string myDate = lines[0].Split(" ")[0];
+                string bankName = "";
+                DataTable table = null;
+                if (file.Contains("cnb")){
+                    bankName = "cnb";
+                    table = createTable(lines, '|', 1);
+                }else if (!file.Contains("last")){
+                    bankName = lines[1];
+                    table = createTable(lines, ';', 2);
+                }
+                Console.WriteLine();
+                Console.WriteLine(bankName);
+                displayTable(table);
+                foreach (DataRow row in table.Rows){
+                    Currency tmpC = null;
+                    Currency c = null;
+                    Date d = null;
+                    if (Currencies.Any(Currency => Currency.name == row["kód"].ToString())){
+                        // v seznamu existuje měna s daným kódem
+                        tmpC = Currencies.Find(Currency => Currency.name == row["kód"].ToString());
 
-                        }else if (monitoredCurrencies.Contains(row["kód"].ToString())){
-                            // neexistuje, vytvoř novou měnu, pokud je v seznamu sledovaných měn
-                            c = new Currency(row["kód"].ToString(), row["země"].ToString());
-                        }
-
-                        if (tmpC != null) { //existuje měna
-                            if (tmpC.dates.Any(Date => Date.date.ToString() == myDate)){
-                                // existuje datum ve měně, přidej do něj novou banku s kurzem
+                    }else if (monitoredCurrencies.Contains(row["kód"].ToString())){
+                        // neexistuje, vytvoř novou měnu, pokud je v seznamu sledovaných měn
+                        c = new Currency(row["kód"].ToString(), row["země"].ToString());
+                    }if (tmpC != null){ 
+                        //existuje měna
+                        if (tmpC.dates.Any(Date => Date.date.ToString() == myDate)){
+                            // existuje datum ve měně, přidej do něj novou banku s kurzem
+                            if (bankName == "cnb"){
                                 Currencies.Find(Currency => Currency.name == row["kód"].ToString())
-                                    .dates.Find(Date => Date.date.ToString() == myDate).
-                                        createBank(bankName, 0, 0, formatPlatform(row["kurz"].ToString()), 0);
+                                .dates.Find(Date => Date.date.ToString() == myDate).
+                                    createBank(bankName, formatPlatform(row["nakup"].ToString()), 
+                                    formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
                             }else{
-                                // neexistuje datum ve měně, vytvoř nové datum, a přidej do něj novou banku s kurzem
-                                d = new Date(DateTime.ParseExact(myDate, "dd.MM.yyyy", CultureInfo.InvariantCulture));
-                                d.createBank(bankName, 0, 0, formatPlatform(row["kurz"].ToString()), 0);
-                                Currencies.Find(Currency => Currency.name == row["kód"].ToString()).dates.Add(d);
+                                Currencies.Find(Currency => Currency.name == row["kód"].ToString())
+                                .dates.Find(Date => Date.date.ToString() == myDate).
+                                    createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
                             }
-                        } else if(c != null) {    //neexistuje měna, mám novou vytvořenou
-                            // v nové právě vytvořené měně nemůže být datum, vytvoř ho a vše přidej
+                        }else{
+                            // neexistuje datum ve měně, vytvoř nové datum, a přidej do něj novou banku s kurzem
                             d = new Date(DateTime.ParseExact(myDate, "dd.MM.yyyy", CultureInfo.InvariantCulture));
-                            d.createBank(bankName, 0, 0, formatPlatform(row["kurz"].ToString()), 0);
-                            c.dates.Add(d);
-                            Currencies.Add(c);
+                            if (bankName == "cnb"){
+                                d.createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
+                            }else{
+                                d.createBank(bankName, formatPlatform(row["nakup"].ToString()),
+                                    formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
+                            }
+                            Currencies.Find(Currency => Currency.name == row["kód"].ToString()).dates.Add(d);
                         }
+                    }else if (c != null)
+                    {    //neexistuje měna, mám novou vytvořenou
+                         // v nové právě vytvořené měně nemůže být datum, vytvoř ho a vše přidej
+                        d = new Date(DateTime.ParseExact(myDate, "dd.MM.yyyy", CultureInfo.InvariantCulture));
+                        if (bankName == "cnb"){
+                            d.createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
+                        }else{
+                            d.createBank(bankName, formatPlatform(row["nakup"].ToString()),
+                                    formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
+                        }
+                        c.dates.Add(d);
+                        Currencies.Add(c);
                     }
                 }
+
             }
 
         }
 
-        private DataTable createCurrTable(List<string> lines)
+
+        private DataTable createTable(List<string> lines, char separator, int skip)
         {
             DataTable dt = new DataTable();
 
@@ -128,16 +151,16 @@ namespace STIProkoratKrausnerBroz.Models
                 lines.RemoveAt(i);
             }
             lines.RemoveAll(string.IsNullOrWhiteSpace);
-            string[] tmp = lines[0].Split("|");
+            string[] tmp = lines[0].Split(separator);
             string[] headers = tmp.Distinct().ToArray();
             foreach (string header in headers)
             {
 
                 dt.Columns.Add(new DataColumn(header.ToLower()));
             }
-            foreach (string itemLine in lines.Skip(1))
+            foreach (string itemLine in lines.Skip(skip))
             {
-                string[] items = itemLine.Split("|");
+                string[] items = itemLine.Split(separator);
                 DataRow dr = dt.NewRow();
                 for (int i = 0; i < tmp.Length; i++)
                 {
@@ -151,6 +174,15 @@ namespace STIProkoratKrausnerBroz.Models
 
             }
             return dt;
+        }
+
+        private double formatPlatform(String s)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return double.Parse(s.Replace(",", "."));
+            }
+            return double.Parse(s);
         }
 
         public Boolean getExchangeRatesFileTxt(string bank, string startupPath)
@@ -216,14 +248,7 @@ namespace STIProkoratKrausnerBroz.Models
             }
         }
 
-        public double formatPlatform(String s)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                return double.Parse(s.Replace(",", "."));
-            }
-            return double.Parse(s);
-        }
+
 
         public DateTime getLastDownloadDate()
         {
@@ -260,7 +285,7 @@ namespace STIProkoratKrausnerBroz.Models
         private string normalizetoTXTa(string data, String Bank)
         {
             String[] datas = data.Split('\n');
-            string respond = DateTime.Today.ToString() + Environment.NewLine + Bank + Environment.NewLine + "Nazev;Kod;Pocet;Nakup;Prodej;Stred;Nakup;Prodej;Stred" + Environment.NewLine;
+            string respond = DateTime.Today.ToString("dd.MM.yyyy") + Environment.NewLine + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
             for (int i = 8; i < datas.Length - 12; i = i + 12)
             {
                 respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 6] + ";" + datas[i + 8] + ";" + datas[i + 9] + ";" + datas[i + 10] + Environment.NewLine;
@@ -271,7 +296,7 @@ namespace STIProkoratKrausnerBroz.Models
         private string normalizetoTXTb(string data, String Bank)
         {
             String[] datas = data.Split('\n');
-            string respond = DateTime.Today.ToString() + Environment.NewLine + Bank + Environment.NewLine + "Nazev;Kod;Pocet;Nakup;Prodej;Stred;Nakup;Prodej;Stred" + Environment.NewLine;
+            string respond = DateTime.Today.ToString("dd.MM.yyyy") + Environment.NewLine + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
             for (int i = 8; i < datas.Length - 11; i = i + 11)
             {
                 respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 3] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 7] + ";" + datas[i + 8] + ";" + datas[i + 9] + Environment.NewLine;
@@ -299,12 +324,6 @@ namespace STIProkoratKrausnerBroz.Models
                 else {
                     if (response.CharacterSet == "windows-1250")
                     { 
-                    /*Encoding srcEncoding = CodePagesEncodingProvider.Instance.GetEncoding(1250);
-                        UnicodeEncoding dstEncoding = new UnicodeEncoding();
-                        byte[] srcBytes = srcEncoding.GetBytes(url);
-                        byte[] dstBytes = dstEncoding.GetBytes(url);
-                        dstEncoding.GetString(dstBytes);
-                        readStream = new StreamReader(receiveStream, dstEncoding);*/
                         readStream = new StreamReader(receiveStream, CodePagesEncodingProvider.Instance.GetEncoding(1250));
                     }
                     else
