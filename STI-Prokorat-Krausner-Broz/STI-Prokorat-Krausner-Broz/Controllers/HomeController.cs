@@ -22,7 +22,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             this.downloadTXT();
             this.setTimerAndStart();
             t.createCurrency("tmp_files/");
-            foreach(Currency c in t.Currencies){
+            /*foreach(Currency c in t.Currencies){
                 Console.WriteLine(c.name+" "+c.state);
                 foreach(Date d in c.dates)
                 {
@@ -32,7 +32,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
                         Console.WriteLine(b.name+" "+b.saleVal);
                     }
                 }
-            }/*
+            }
             var currencies = t.Currencies.FindAll(Currency => Currency.name == "USD");
             foreach(var c in currencies)
             {

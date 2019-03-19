@@ -16,7 +16,7 @@
         <canvas class="graphCanvas" id="cny-purchase-canvas"></canvas>
     </div>
     <div class="graphCanvasDiv">
-            <canvas class="graphCanvas" id="cny-sale-canvas"></canvas>
+        <canvas class="graphCanvas" id="cny-sale-canvas"></canvas>
     </div>
 </div>
 <div class="currencyContainer" id="eurDiv">
@@ -28,99 +28,214 @@
     </div>
 </div>
 <div class="currencyContainer" id="hrkDiv">
-    <canvas class="graphCanvas" id="hrk-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="hrk-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="hrk-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="hrk-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="cadDiv">
-    <canvas class="graphCanvas" id="cad-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="cad-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="cad-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="cad-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="hufDiv">
-    <canvas class="graphCanvas" id="huf-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="huf-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="huf-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="huf-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="nokDiv">
-    <canvas class="graphCanvas" id="nok-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="nok-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="nok-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="nok-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="plnDiv">
-    <canvas class="graphCanvas" id="pln-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="pln-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="pln-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="pln-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="ronDiv">
-    <canvas class="graphCanvas" id="ron-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="ron-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="ron-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="ron-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="rubDiv">
-    <canvas class="graphCanvas" id="rub-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="rub-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="rub-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="rub-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="sekDiv">
-    <canvas class="graphCanvas" id="sek-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="sek-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="sek-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="sek-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="chfDiv">
-    <canvas class="graphCanvas" id="chf-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="chf-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="chf-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="chf-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="tryDiv">
-    <canvas class="graphCanvas" id="try-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="try-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="try-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="try-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="usdDiv">
-    <canvas class="graphCanvas" id="usd-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="usd-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="usd-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="usd-sale-canvas"></canvas>
+    </div>
 </div>
 <div class="currencyContainer" id="gbpDiv">
-    <canvas class="graphCanvas" id="gbp-purchase-canvas"></canvas>
-    <canvas class="graphCanvas" id="gbp-sale-canvas"></canvas>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="gbp-purchase-canvas"></canvas>
+    </div>
+    <div class="graphCanvasDiv">
+        <canvas class="graphCanvas" id="gbp-sale-canvas"></canvas>
+    </div>
 </div>
-
 <script type="text/javascript">
     let bankNames = [];
     var numOfcurrencies = @Model.monitoredCurrencies.Length;
+
     let currenciesSales = [];
     let currenciesPurchases = [];
     let dates = [];
     let currencyNames = [];
     var currencyIndex = 0;
-    var i = 0;
-    var j = 0;
+    var indexes = [0,0,0,0,0,0,0,0,0,0];
     @{
         foreach (var d in Model.Currencies[0].dates) {
             @:dates.push("@d.date.ToString()");
         }
-        foreach (var b in Model.Currencies[0].dates[0].banks){
+        foreach (var b in Model.Currencies[0].dates[0].banks) {
             @:bankNames.push("@b.name");
         }
-        foreach(var c in Model.Currencies){
-            @:currencyNames.push("@c.name");
-            foreach(var d in c.dates){
-                @:if(currenciesSales.length < 15){
-                    @:currenciesSales.push([]);
-                    @:currenciesPurchases.push([]);
-                @:}
-                foreach (var b in d.banks){
-                    @:currenciesSales[i][j] = "@b.saleVal";
-                    @:currenciesPurchases[i][j] = "@b.purchaseVal";
-                    @:j++;
-                    @:if(j == dates.length){
-                        @:i++;
-                        @:j = 0;
-                    @:}
-                 }
-            }
-            @:console.log("@c.name.ToLower()"+"-sale-canvas");
-            @:console.log(currenciesSales[currencyIndex]);
-            @:createCurrencySaleGraph("@c.name.ToLower()"+"-sale-canvas", "@c.name", bankNames[0], dates, currenciesSales[currencyIndex]);
-            @:createCurrencyPurchaseGraph("@c.name.ToLower()"+"-purchase-canvas", "@c.name", bankNames[0], dates, currenciesPurchases[currencyIndex]);
-            @:currencyIndex++;
-        }
      }
-    //createCurrencySaleGraph("aud-sale-canvas", "AUD", bankNames, dates, currenciesSales[0]);
-    //console.log(currenciesSales);
-    //console.log(currenciesPurchases);
+            var salesKB = [];
+            var purchasesKB = [];
+            var salesRB = [];
+            var purchasesRB = [];
+            var salesCS = [];
+            var purchasesCS = [];
+            var salesCNB = [];
+            var purchasesCNB = [];
+            var salesCSOB = [];
+            var purchasesCSOB = [];
+    @{
+        foreach(var curr in Model.Currencies){
+            foreach(var date in curr.dates){
+                @:salesKB.push([]);
+                @:purchasesKB.push([]);
+                @:salesRB.push([]);
+                @:purchasesRB.push([]);
+                @:salesCS.push([]);
+                @:purchasesCS.push([]);
+                @:salesCNB.push([]);
+                @:purchasesCNB.push([]);
+                @:salesCSOB.push([]);
+                @:purchasesCSOB.push([]);
+                foreach(var bank in date.banks){
+                    if(bank.name == "kb"){
+                        @:addToArray(salesKB, indexes[0], indexes[1], "@bank.saleVal");
+                        @:addToArray(purchasesKB, indexes[0], indexes[1], "@bank.purchaseVal");
+                    }
+                    if(bank.name == "rb"){
+                        @:addToArray(salesRB, indexes[2], indexes[3], "@bank.saleVal");
+                        @:addToArray(purchasesRB, indexes[2], indexes[3], "@bank.purchaseVal");
+                    }
+                    if(bank.name == "cs"){
+                        @:addToArray(salesCS, indexes[4], indexes[5], "@bank.saleVal");
+                        @:addToArray(purchasesCS, indexes[4], indexes[5], "@bank.purchaseVal");
+                    }
+                    if(bank.name == "cnb"){
+                        @:addToArray(salesCNB, indexes[6], indexes[7], "@bank.saleVal");
+                        @:addToArray(purchasesCNB, indexes[6], indexes[7], "@bank.purchaseVal");
+                    }
+                    if(bank.name == "csob"){
+                        @:addToArray(salesCSOB, indexes[8], indexes[9], "@bank.saleVal");
+                        @:addToArray(purchasesCSOB, indexes[8], indexes[9], "@bank.purchaseVal");
+                    }
 
+
+                }
+
+            }
+        }
+
+
+        @:console.log(salesKB);
+        @:console.log(salesRB);
+        @:console.log(salesCS);
+        @:console.log(salesCNB);
+        @:console.log(salesCSOB);
+        /*
+            foreach(var c in Model.Currencies){
+                @:currencyNames.push("@c.name");
+                @:console.log("@c.name");
+                foreach(var d in c.dates){
+                    @:if(currenciesSales.length < 15){
+                        @:currenciesSales.push([]);
+                        @:currenciesPurchases.push([]);
+                    @:}
+                    @:console.log("@d.date");
+                    foreach (var b in d.banks){
+                        @:console.log("@b.name");
+                        @:console.log("@b.saleVal");
+                        //@:currenciesSales[i][j] = "@b.saleVal";
+                        //@:currenciesPurchases[i][j] = "@b.purchaseVal";
+                        @:j++;
+                        @:if(j == dates.length){
+                            @:i++;
+                            @:j = 0;
+                        @:}
+                     }
+                }
+                //@:console.log("@c.name.ToLower()"+"-sale-canvas");
+                //@:console.log(currenciesSales[currencyIndex]);
+                //@:createCurrencySaleGraph("@c.name.ToLower()"+"-sale-canvas", "@c.name", bankNames, dates, currenciesSales[currencyIndex]);
+                //@:createCurrencyPurchaseGraph("@c.name.ToLower()"+"-purchase-canvas", "@c.name", bankNames, dates, currenciesPurchases[currencyIndex]);
+               // @:currencyIndex++;
+            }*/
+        }
+
+    function addToArray(array, i, j, value){
+        array[i][j] = value;
+        j++;
+        if(j == dates.length){
+            i++;
+            j = 0;
+        }
+    };
 </script>
 
 
