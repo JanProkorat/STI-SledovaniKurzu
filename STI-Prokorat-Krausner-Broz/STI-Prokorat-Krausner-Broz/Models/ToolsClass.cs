@@ -21,8 +21,8 @@ namespace STIProkoratKrausnerBroz.Models
         public ToolsClass()
         {
             Currencies = new List<Currency>();
-            monitoredCurrencies = new string[] { "AUD", "CNY", "EUR", "HRK", "CAD", "HUF",
-                "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "TRY", "USD", "GBP"};
+            monitoredCurrencies = new string[] { "AUD", "DKK", "EUR", "HRK", "CAD", "HUF",
+                "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
         }
 
 
