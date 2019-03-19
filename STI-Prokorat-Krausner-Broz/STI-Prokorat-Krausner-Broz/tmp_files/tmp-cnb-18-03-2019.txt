@@ -1,4 +1,4 @@
-15.03.2019 #53
+18.03.2019 #53
 země|měna|množství|kód|kurz
 Austrálie|dolar|1|AUD|16,052
 Brazílie|real|1|BRL|5,889

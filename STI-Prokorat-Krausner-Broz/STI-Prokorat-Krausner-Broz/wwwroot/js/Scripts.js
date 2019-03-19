@@ -3,103 +3,6 @@
     return '#' + randNum.toString(16).padStart(6,"0");
 }
 
-function createGraph(bankName, type, canvasName, names, dates, data){
-    let labels = [];
-    var dateFormat = 'DD/MM/YYYY'; 
-    for(var i in dates){
-        var splitedData = dates[i].split(' ');
-        labels.push(moment(splitedData[0], dateFormat));
-    }
-    var ctx = document.getElementById(canvasName).getContext('2d');
-    var config = {
-        type: 'line',
-        data:{
-            labels: labels
-        },
-        options: {
-            title: {
-                display: true,
-                text: bankName+': Cena za '+type+' měn'
-            },
-            scales:{
-                xAxes: [{
-                    type: 'time',
-                    unit: 'day',
-                    unitStepSize: 1,
-                    distribution: 'series',
-                    ticks:{
-                        source: 'labels'
-                    }
-                }],
-                yAxes:[{
-                    display: true,
-                    labelString: 'Hodnota kurzu'
-                }]
-            }
-        }
-    };
-    var chart = new Chart(ctx, config);
-    for(let i = 0; i < names.length; i++){
-        console.log(data[i]);
-        chart.data.datasets.push({
-            data: data[i],
-            label: names[i],
-            borderColor: randomColor(),
-            fill: false
-        });
-    }
-    chart.update();
-    window.myline = chart;
-}
-
-function createCurrencyGraph(canvasName, currencyName, bankNames, dates, currenciesSales) {
-    let labels = [];
-    var dateFormat = 'DD/MM/YYYY'; 
-    for(var i in dates){
-        var splitedData = dates[i].split(' ');
-        labels.push(moment(splitedData[0], dateFormat));
-    }
-    var ctx = document.getElementById(canvasName).getContext('2d');
-    var config = {
-        type: 'line',
-        data:{
-            labels: labels
-        },
-        options: {
-            title: {
-                display: true,
-                text: currencyName+': Cena za prodej'
-            },
-            scales:{
-                xAxes: [{
-                    type: 'time',
-                    unit: 'day',
-                    unitStepSize: 1,
-                    distribution: 'series',
-                    ticks:{
-                        source: 'labels'
-                    }
-                }],
-                yAxes:[{
-                    display: true,
-                    labelString: 'Hodnota kurzu'
-                }]
-            }
-        }
-    };
-    var chart = new Chart(ctx, config);
-    for(let i = 0; i < bankNames.length; i++){
-        chart.data.datasets.push({
-            data: currenciesSales[i],
-            label: bankNames[i],
-            borderColor: randomColor(),
-            fill: false
-        });
-    }
-    chart.update();
-    window.myline = chart;
-}
-
 function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, dataArray) {
     let labels = [];
     var dateFormat = 'DD/MM/YYYY'; 
@@ -111,13 +14,34 @@ function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, data
       type: 'line',
       data: {
         labels: dates,
-        datasets: [{ 
-            data: dataArray,
-            label: bankName,
-            borderColor: randomColor(),
-            fill: false
-          }
-        ]
+        datasets: [
+                { 
+                    data: dataArray[0],
+                    label: bankNames[0],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[1],
+                    label: bankNames[1],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[2],
+                    label: bankNames[2],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[3],
+                    label: bankNames[3],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[4],
+                    label: bankNames[4],
+                    borderColor: randomColor(),
+                    fill: false
+                }
+            ]
       },
       options: {
         title: {
@@ -126,10 +50,10 @@ function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, data
         },
         scales:{
             xAxes: [{
-                //type: 'time',
-                //unit: 'day',
-                //unitStepSize: 1,
-                //distribution: 'series',
+                type: 'time',
+                unit: 'day',
+                unitStepSize: 1,
+                distribution: 'series',
                 ticks:{
                     source: 'labels'
                 }
@@ -155,13 +79,34 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankName, dates, 
       type: 'line',
       data: {
         labels: dates,
-        datasets: [{ 
-            data: dataArray,
-            label: bankName,
-            borderColor: randomColor(),
-            fill: false
-          }
-        ]
+            datasets: [
+                { 
+                    data: dataArray[0],
+                    label: bankNames[0],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[1],
+                    label: bankNames[1],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[2],
+                    label: bankNames[2],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[3],
+                    label: bankNames[3],
+                    borderColor: randomColor(),
+                    fill: false
+                }, {
+                    data: dataArray[4],
+                    label: bankNames[4],
+                    borderColor: randomColor(),
+                    fill: false
+                }
+            ]
       },
       options: {
         title: {
@@ -170,10 +115,10 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankName, dates, 
         },
         scales:{
             xAxes: [{
-                //type: 'time',
-                //unit: 'day',
-                //unitStepSize: 1,
-                //distribution: 'series',
+                type: 'time',
+                unit: 'day',
+                unitStepSize: 1,
+                distribution: 'series',
                 ticks:{
                     source: 'labels'
                 }
