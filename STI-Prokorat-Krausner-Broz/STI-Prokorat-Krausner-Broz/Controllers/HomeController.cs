@@ -15,6 +15,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         ToolsClass t = new ToolsClass();
         Timer timer = null;
         Timer timerTest = null;
+        int i = 0;
 
         public IActionResult Index()
         {
@@ -48,9 +49,9 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         public void setTimerAndStart()
         {
             AutoResetEvent autoEvent = new AutoResetEvent(false);
-            timer = new Timer(this.Timer_Elapsed,autoEvent, 3600000,-1);
+            timer = new Timer(this.Timer_Elapsed,autoEvent, 3600000, 3600000);
 
-            timerTest = new Timer(this.TimerTest_Elapsed, autoEvent, 1000, -1);
+            //timerTest = new Timer(this.TimerTest_Elapsed, autoEvent, 1000, 1000);
 
         }
 
@@ -61,7 +62,8 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 
         public void TimerTest_Elapsed(Object stateInfo)
         {
-            Console.WriteLine("Fuck  this shitelapsed!!!!");
+            Console.WriteLine("Fuck  this shitelapsed!!!! " + i.ToString() + " times!!");
+            i++;
         }
 
         public void downloadTXT()

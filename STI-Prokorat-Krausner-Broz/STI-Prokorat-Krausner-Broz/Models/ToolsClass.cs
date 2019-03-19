@@ -220,6 +220,10 @@ namespace STIProkoratKrausnerBroz.Models
                 //Console.WriteLine(s);
                 return double.Parse(s.Replace(",", "."));
             }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return double.Parse(s.Replace(".",","));
+            }
             return double.Parse(s);
         }
 
