@@ -1,5 +1,4 @@
-18.03.2019
-cs
+18.03.2019 cs
 země;kód;množství;nakup;prodej;stred;nakup;prodej;stred
 Americký dolar;USD;1;22.075;23.207;22.641;21.980;23.300;22.641
 Australský dolar;AUD;1;15.646;16.448;16.047;15.490;16.610;16.047

@@ -73,18 +73,28 @@ namespace STIProkoratKrausnerBroz.Models
             foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt"))
             {
                 List<string> lines = File.ReadAllLines(file).ToList();
-                string myDate = lines[0].Split(" ")[0];
+                DateTime myDate = DateTime.ParseExact(lines[0].Split(" ")[0].Trim(), "dd.MM.yyyy", CultureInfo.InvariantCulture);
                 string bankName = "";
-                DataTable table = null;
+                DataTable table = new DataTable();
                 if (file.Contains("cnb")){
                     bankName = "cnb";
-                    table = createTable(lines, '|', 1);
+                    createTable(table, lines, '|', 1);
                 }else if (!file.Contains("last")){
-                    bankName = lines[1];
-                    table = createTable(lines, ';', 2);
+                    bankName = lines[0].Split(" ")[1];
+                    createTable(table, lines, ';', 1);
                 }
+                loadCurrenciesToList(table);
+                foreach(Currency curr in Currencies){
+                    if (!curr.dates.Any(Date => Date.date.Day == myDate.Day && 
+                        Date.date.Month == myDate.Month && Date.date.Year == myDate.Year)){
+                        curr.dates.Add(new Date(myDate));
+                    }
+                }
+                loadBanksToDates(table, bankName, myDate);
+                //Console.WriteLine();
+                //Console.WriteLine(bankName);
                 //displayTable(table);
-                foreach (DataRow row in table.Rows){
+                /*foreach (DataRow row in table.Rows){
                     Currency tmpC = null;
                     Currency c = null;
                     Date d = null;
@@ -133,29 +143,53 @@ namespace STIProkoratKrausnerBroz.Models
                         c.dates.Add(d);
                         Currencies.Add(c);
                     }
-                }
+                }*/
 
             }
 
         }
 
+        private void loadBanksToDates(DataTable table, String bankName, DateTime localDate){
+            foreach(DataRow row in table.Rows){
+                foreach(Currency curr in Currencies){
+                    if(curr.name == row["kód"].ToString()){
+                        if (bankName == "cnb"){
+                            curr.dates.Find(Date => Date.date == localDate).
+                            createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
+                        }
+                        else{
+                            curr.dates.Find(Date => Date.date == localDate).
+                            createBank(bankName, formatPlatform(row["nakup"].ToString()),
+                            formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
+                        }
+                    }      
+                }
+            }
+        }
 
-        private DataTable createTable(List<string> lines, char separator, int skip)
+        private void loadCurrenciesToList(DataTable table)
         {
-            DataTable dt = new DataTable();
-            /*for (int i = 0; i < 1; i++)
+            foreach (DataRow row in table.Rows)
+            {
+                if (!Currencies.Any(Currency => Currency.name == row["kód"].ToString()) && 
+                    monitoredCurrencies.Contains(row["kód"].ToString())){
+                    Currencies.Add(new Currency(row["kód"].ToString(), row["země"].ToString()));
+                }
+            }
+        }
+
+        private void createTable(DataTable dt, List<string> lines, char separator, int skip)
+        {
+            for (int i = 0; i < 1; i++)
             {
                 lines.RemoveAt(i);
-            }*/
-            foreach(string line in lines)
-            {
-                Console.WriteLine(line);
             }
+            lines.RemoveAll(string.IsNullOrWhiteSpace);
             string[] tmp = lines[0].Split(separator);
             string[] headers = tmp.Distinct().ToArray();
             foreach (string header in headers)
             {
-                //Console.WriteLine(header);
+
                 dt.Columns.Add(new DataColumn(header.ToLower()));
             }
             foreach (string itemLine in lines.Skip(skip))
@@ -173,13 +207,17 @@ namespace STIProkoratKrausnerBroz.Models
                 dt.Rows.Add(dr);
 
             }
-            return dt;
         }
 
         private double formatPlatform(String s)
         {
+            if(s.Trim() == "-")
+            {
+                s = "0";
+            }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
+                //Console.WriteLine(s);
                 return double.Parse(s.Replace(",", "."));
             }
             return double.Parse(s);
@@ -189,10 +227,6 @@ namespace STIProkoratKrausnerBroz.Models
         {
             //Save file from url as tmp-/bank/-/date/.txt
             //return true if download was completed else return false
-            if (testLastDownload())
-            {
-                return true;
-            }
             bank = bank.ToLower();
             String url = getExchangeListUrl(bank);
             if (!testUrlReachable(url))
@@ -262,7 +296,22 @@ namespace STIProkoratKrausnerBroz.Models
             DateTime date = DateTime.Parse(DateTime.Today.ToString().Split("")[0]);
             DateTime tmpDate = getLastDownloadDate();
             int daydiff = (int)((date - tmpDate).TotalDays);
-            return daydiff == 0;
+            int hour = DateTime.Now.Hour;
+            int minute = DateTime.Now.Minute;
+            double time = (double)hour + ((double)minute / 100.0);
+            //Console.WriteLine("Time: " + time.ToString());
+            if (daydiff == 0)
+            {
+                return true;
+            }
+            else if (time > 18.05)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void setLastDownload()
@@ -285,7 +334,7 @@ namespace STIProkoratKrausnerBroz.Models
         private string normalizetoTXTa(string data, String Bank)
         {
             String[] datas = data.Split('\n');
-            string respond = DateTime.Today.ToString("dd.MM.yyyy") + Environment.NewLine + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
+            string respond = DateTime.Today.ToString("dd.MM.yyyy") + " " + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
             for (int i = 8; i < datas.Length - 12; i = i + 12)
             {
                 respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 6] + ";" + datas[i + 8] + ";" + datas[i + 9] + ";" + datas[i + 10] + Environment.NewLine;
@@ -296,7 +345,7 @@ namespace STIProkoratKrausnerBroz.Models
         private string normalizetoTXTb(string data, String Bank)
         {
             String[] datas = data.Split('\n');
-            string respond = DateTime.Today.ToString("dd.MM.yyyy") + Environment.NewLine + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
+            string respond = DateTime.Today.ToString("dd.MM.yyyy") + " " + Bank + Environment.NewLine + "země;kód;množství;nakup;prodej;stred;nakup;prodej;stred" + Environment.NewLine;
             for (int i = 8; i < datas.Length - 11; i = i + 11)
             {
                 respond = respond + datas[i] + ";" + datas[i + 1] + ";" + datas[i + 2] + ";" + datas[i + 3] + ";" + datas[i + 4] + ";" + datas[i + 5] + ";" + datas[i + 7] + ";" + datas[i + 8] + ";" + datas[i + 9] + Environment.NewLine;
