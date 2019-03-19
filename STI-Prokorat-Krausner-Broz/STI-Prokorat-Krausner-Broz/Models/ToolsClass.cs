@@ -83,9 +83,7 @@ namespace STIProkoratKrausnerBroz.Models
                     bankName = lines[1];
                     table = createTable(lines, ';', 2);
                 }
-                Console.WriteLine();
-                Console.WriteLine(bankName);
-                displayTable(table);
+                //displayTable(table);
                 foreach (DataRow row in table.Rows){
                     Currency tmpC = null;
                     Currency c = null;
@@ -145,17 +143,19 @@ namespace STIProkoratKrausnerBroz.Models
         private DataTable createTable(List<string> lines, char separator, int skip)
         {
             DataTable dt = new DataTable();
-
-            for (int i = 0; i < 1; i++)
+            /*for (int i = 0; i < 1; i++)
             {
                 lines.RemoveAt(i);
+            }*/
+            foreach(string line in lines)
+            {
+                Console.WriteLine(line);
             }
-            lines.RemoveAll(string.IsNullOrWhiteSpace);
             string[] tmp = lines[0].Split(separator);
             string[] headers = tmp.Distinct().ToArray();
             foreach (string header in headers)
             {
-
+                //Console.WriteLine(header);
                 dt.Columns.Add(new DataColumn(header.ToLower()));
             }
             foreach (string itemLine in lines.Skip(skip))
