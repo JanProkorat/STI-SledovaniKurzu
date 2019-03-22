@@ -26,6 +26,29 @@ namespace STIProkoratKrausnerBroz.Models
                 "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
         }
 
+        public Boolean testVersion(double versionProg)
+        {
+            string url = "https://github.com/JanProkorat/STI-KontrolaVerze/blob/master/version.txt";
+            if (!this.testUrlReachable(url))
+            {
+                return true;
+            }
+            String tmp = parseVersion(getHTML(url));
+            double versionWeb = Convert.ToDouble(tmp.Replace(".",","));
+            return versionProg == versionWeb;
+        }
+
+        public String parseVersion(string html)
+        {
+            string version = "";
+            String[] separators = new String[] { "< td id = \"LC1\" class=\"blob-code blob-code-inner js-file-line\">","</td>"};
+            String[] datas = html.Split(separators, StringSplitOptions.None);
+            string tmp = datas[1];
+            datas = tmp.Split(">");
+            version = datas[1];
+            return version;
+        }
+
         internal void sortCurrencies()
         {
             List<Currency> tmp = Currencies.OrderBy(Currency => Currency.state).ToList();
