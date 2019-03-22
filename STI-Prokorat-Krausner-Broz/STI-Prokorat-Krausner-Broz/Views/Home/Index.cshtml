@@ -148,28 +148,28 @@
                         @:bankNames.push("@bank.name");
                     @:}
                     if(bank.name == "kb"){
-                        @:currenciesSales[0][indexes[0]] = "@bank.saleVal";
-                        @:currenciesPurchases[0][indexes[0]] = "@bank.purchaseVal";
+                        @:currenciesSales[0][indexes[0]] = "@bank.saleVal.ToString().Replace(",", ".")";
+                        @:currenciesPurchases[0][indexes[0]] = "@bank.purchaseVal.ToString().Replace(",", ".")";
                         @:indexes[0]++;
                     }
                     if(bank.name == "rb"){
-                        @:currenciesSales[1][indexes[1]] = "@bank.saleVal";
-                        @:currenciesPurchases[1][indexes[1]] = "@bank.purchaseVal";
+                        @:currenciesSales[1][indexes[1]] = "@bank.saleVal.ToString().Replace(",", ".")";
+                        @:currenciesPurchases[1][indexes[1]] = "@bank.purchaseVal.ToString().Replace(",", ".")";
                         @:indexes[1]++;
                     }
                     if(bank.name == "cs"){
-                        @:currenciesSales[2][indexes[2]] = "@bank.saleVal";
-                        @:currenciesPurchases[2][indexes[2]] = "@bank.purchaseVal";
+                        @:currenciesSales[2][indexes[2]] = "@bank.saleVal.ToString().Replace(",", ".")";
+                        @:currenciesPurchases[2][indexes[2]] = "@bank.purchaseVal.ToString().Replace(",", ".")";
                         @:indexes[2]++;
                     }
                     if(bank.name == "cnb"){
-                        @:currenciesSales[3][indexes[3]] = "@bank.saleVal";
-                        @:currenciesPurchases[3][indexes[3]] = "@bank.purchaseVal";
+                        @:currenciesSales[3][indexes[3]] = "@bank.saleVal.ToString().Replace(",", ".")";
+                        @:currenciesPurchases[3][indexes[3]] = "@bank.purchaseVal.ToString().Replace(",", ".")";
                         @:indexes[3]++;
                     }
                     if(bank.name == "csob"){
-                        @:currenciesSales[4][indexes[4]] = "@bank.saleVal";
-                        @:currenciesPurchases[4][indexes[4]] = "@bank.purchaseVal";
+                        @:currenciesSales[4][indexes[4]] = "@bank.saleVal.ToString().Replace(",", ".")";
+                        @:currenciesPurchases[4][indexes[4]] = "@bank.purchaseVal.ToString().Replace(",", ".")";
                         @:indexes[4]++;
                     }
 
