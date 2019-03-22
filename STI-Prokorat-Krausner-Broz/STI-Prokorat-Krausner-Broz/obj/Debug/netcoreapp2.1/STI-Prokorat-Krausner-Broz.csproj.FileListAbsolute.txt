@@ -222,3 +222,4 @@ C:/Users/KraukyMan/Desktop/STI_Project/New/STI-SledovaniKurzu/STI-Prokorat-Kraus
 /Users/jan/Downloads/STI-SledovaniKurzu-master/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/Debug/netcoreapp2.1/STI-Prokorat-Krausner-Broz.dll
 /Users/jan/Downloads/STI-SledovaniKurzu-master/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/Debug/netcoreapp2.1/STI-Prokorat-Krausner-Broz.pdb
 /Users/jan/Downloads/STI-SledovaniKurzu-master/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/Debug/netcoreapp2.1/STI-Prokorat-Krausner-Broz.csproj.CopyComplete
+/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/Debug/netcoreapp2.1/Razor/Views/Home/TableView.g.cshtml.cs

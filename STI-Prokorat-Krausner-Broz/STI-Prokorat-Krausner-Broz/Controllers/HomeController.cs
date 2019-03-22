@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -12,41 +13,29 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 {
     public class HomeController : Controller
     {
-        ToolsClass t = new ToolsClass();
+        private ToolsClass t = new ToolsClass();
         Timer timer = null;
-        Timer timerTest = null;
+        //Timer timerTest = null;
         int i = 0;
 
         public IActionResult Index()
         {
+
             this.downloadTXT();
             this.setTimerAndStart();
             t.createCurrency("tmp_files/");
-            /*foreach(Currency c in t.Currencies){
-                Console.WriteLine(c.name+" "+c.state);
-                foreach(Date d in c.dates)
-                {
-                    Console.WriteLine(d.date.ToString("dd.MM.yyyy"));
-                    foreach (Bank b in d.banks)
-                    {
-                        Console.WriteLine(b.name+" "+b.saleVal);
-                    }
-                }
-            }
-            var currencies = t.Currencies.FindAll(Currency => Currency.name == "USD");
-            foreach(var c in currencies)
-            {
-                Console.WriteLine(c.state + " " + c.name);
-                foreach (Date d in c.dates)
-                {
-                    Console.WriteLine(d.date.ToString());
-                }
-            }
-            */
             return View(t);
         }
 
-        public void setTimerAndStart()
+        public ActionResult TableView(){
+            TableData td = new TableData();
+            td.loadFiles("tmp_files/");
+            td.sortList();
+            Console.WriteLine("hotovo");
+            return View(td);
+        }
+
+        private void setTimerAndStart()
         {
             AutoResetEvent autoEvent = new AutoResetEvent(false);
             timer = new Timer(this.Timer_Elapsed,autoEvent, 3600000, 3600000);
@@ -55,18 +44,18 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 
         }
 
-        public void Timer_Elapsed(Object stateInfo)
+        private void Timer_Elapsed(Object stateInfo)
         {
             downloadTXT();
         }
 
-        public void TimerTest_Elapsed(Object stateInfo)
+        private void TimerTest_Elapsed(Object stateInfo)
         {
             Console.WriteLine("Fuck  this shitelapsed!!!! " + i.ToString() + " times!!");
             i++;
         }
 
-        public void downloadTXT()
+        private void downloadTXT()
         {
             String[] bankCodes = new String[5];
             bankCodes[0] = "CNB";

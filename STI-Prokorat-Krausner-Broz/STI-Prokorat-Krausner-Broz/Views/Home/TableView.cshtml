@@ -1,0 +1,165 @@
+﻿@model STIProkoratKrausnerBroz.Models.TableData
+@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Tabulky";
+}
+
+<div class="checkBoxDiv">
+        <label class="container">
+            ČNB
+            <input type="radio" checked="checked" name="radio" id="cnbRadio" onclick="showTable('cnbTableDiv')">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            ČSOB
+            <input type="radio" name="radio" id="csobRadio" onclick="showTable('csobTableDiv')">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            ČS
+            <input type="radio" name="radio" id="csRadio" onclick="showTable('csTableDiv')">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            KB
+            <input type="radio" name="radio" id="kbRadio" onclick="showTable('kbTableDiv')">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            RB
+            <input type="radio" name="radio" id="rbRadio" onclick="showTable('rbTableDiv')">
+            <span class="checkmark"></span>
+        </label>
+</div>
+
+<div class="tableDiv" id="kbTableDiv">
+
+    <h2>Banka: @Model.Tables[0].bankName.ToUpper()</h2>
+    <h2>Datum: @Model.Tables[0].date.ToString("dd.MM.yyyy")</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Tables[0].table.Columns)
+                {
+                    <th> @col.ColumnName </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Tables[0].table.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.Tables[0].table.Columns)
+                    {
+                        <td> @row[col.ColumnName] </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv" id="csTableDiv">
+    <h2>Banka: @Model.Tables[1].bankName.ToUpper()</h2>
+    <h2>Datum: @Model.Tables[1].date.ToString("dd.MM.yyyy")</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Tables[1].table.Columns)
+                {
+                    <th> @col.ColumnName </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Tables[1].table.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.Tables[1].table.Columns)
+                    {
+                        <td> @row[col.ColumnName] </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv" id="rbTableDiv">
+    <h2>Banka: @Model.Tables[2].bankName.ToUpper()</h2>
+    <h2>Datum: @Model.Tables[2].date.ToString("dd.MM.yyyy")</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Tables[2].table.Columns)
+                {
+                    <th> @col.ColumnName </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Tables[2].table.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.Tables[2].table.Columns)
+                    {
+                        <td> @row[col.ColumnName] </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv" id="cnbTableDiv">
+    <h2>Banka: @Model.Tables[3].bankName.ToUpper()</h2>
+    <h2>Datum: @Model.Tables[3].date.ToString("dd.MM.yyyy")</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Tables[3].table.Columns)
+                {
+                    <th> @col.ColumnName </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Tables[3].table.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.Tables[3].table.Columns)
+                    {
+                        <td> @row[col.ColumnName] </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv" id="csobTableDiv">
+    <h2>Banka: @Model.Tables[4].bankName.ToUpper()</h2>
+    <h2>Datum: @Model.Tables[4].date.ToString("dd.MM.yyyy")</h2>
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Tables[4].table.Columns)
+                {
+                    <th> @col.ColumnName </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Tables[4].table.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.Tables[4].table.Columns)
+                    {
+                        <td> @row[col.ColumnName] </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

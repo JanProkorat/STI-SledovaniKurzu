@@ -1,7 +1,8 @@
 ﻿@model STIProkoratKrausnerBroz.Models.ToolsClass
+@using System.Data
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Grafy";
 }
 <div class="currencyContainer" id="audDiv">
     <div class="graphCanvasDiv">
@@ -128,14 +129,11 @@
     let dates = [];
     let currencyNames = [];
     @{
+
         foreach (var d in Model.Currencies[0].dates)
         {
             @:dates.push("@d.date.ToString()");
         }
-        /*foreach (var b in Model.Currencies[0].dates[0].banks)
-        {
-            @:bankNames.push("@b.name");
-        }*/
         foreach(var curr in Model.Currencies){
             @:var currenciesSales = [];
             @:var currenciesPurchases = [];

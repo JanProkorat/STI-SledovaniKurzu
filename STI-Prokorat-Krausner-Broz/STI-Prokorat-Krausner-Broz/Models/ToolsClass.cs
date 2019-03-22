@@ -16,12 +16,13 @@ namespace STIProkoratKrausnerBroz.Models
     {
 
         public List<Currency> Currencies { get; set; }
-        public string[] monitoredCurrencies { get; set; }
+
+        public string[] MonitoredCurrencies { get; set; }
 
         public ToolsClass()
         {
             Currencies = new List<Currency>();
-            monitoredCurrencies = new string[] { "AUD", "DKK", "EUR", "HRK", "CAD", "HUF",
+            MonitoredCurrencies = new string[] { "AUD", "DKK", "EUR", "HRK", "CAD", "HUF",
                 "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
         }
 
@@ -72,78 +73,35 @@ namespace STIProkoratKrausnerBroz.Models
         {
             foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt"))
             {
-                List<string> lines = File.ReadAllLines(file).ToList();
-                DateTime myDate = DateTime.ParseExact(lines[0].Split(" ")[0].Trim(), "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                string bankName = "";
-                DataTable table = new DataTable();
-                if (file.Contains("cnb")){
-                    bankName = "cnb";
-                    createTable(table, lines, '|', 1);
-                }else if (!file.Contains("last")){
-                    bankName = lines[0].Split(" ")[1];
-                    createTable(table, lines, ';', 1);
-                }
-                loadCurrenciesToList(table);
-                foreach(Currency curr in Currencies){
-                    if (!curr.dates.Any(Date => Date.date.Day == myDate.Day && 
-                        Date.date.Month == myDate.Month && Date.date.Year == myDate.Year)){
-                        curr.dates.Add(new Date(myDate));
-                    }
-                }
-                loadBanksToDates(table, bankName, myDate);
-                //Console.WriteLine();
-                //Console.WriteLine(bankName);
-                //displayTable(table);
-                /*foreach (DataRow row in table.Rows){
-                    Currency tmpC = null;
-                    Currency c = null;
-                    Date d = null;
-                    if (Currencies.Any(Currency => Currency.name == row["kód"].ToString())){
-                        // v seznamu existuje měna s daným kódem
-                        tmpC = Currencies.Find(Currency => Currency.name == row["kód"].ToString());
+                if(file != "tmp_files/last.txt")
+                {
 
-                    }else if (monitoredCurrencies.Contains(row["kód"].ToString())){
-                        // neexistuje, vytvoř novou měnu, pokud je v seznamu sledovaných měn
-                        c = new Currency(row["kód"].ToString(), row["země"].ToString());
-                    }if (tmpC != null){ 
-                        //existuje měna
-                        if (tmpC.dates.Any(Date => Date.date.ToString() == myDate)){
-                            // existuje datum ve měně, přidej do něj novou banku s kurzem
-                            if (bankName == "cnb"){
-                                Currencies.Find(Currency => Currency.name == row["kód"].ToString())
-                                .dates.Find(Date => Date.date.ToString() == myDate).
-                                    createBank(bankName, formatPlatform(row["nakup"].ToString()), 
-                                    formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
-                            }else{
-                                Currencies.Find(Currency => Currency.name == row["kód"].ToString())
-                                .dates.Find(Date => Date.date.ToString() == myDate).
-                                    createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
-                            }
-                        }else{
-                            // neexistuje datum ve měně, vytvoř nové datum, a přidej do něj novou banku s kurzem
-                            d = new Date(DateTime.ParseExact(myDate, "dd.MM.yyyy", CultureInfo.InvariantCulture));
-                            if (bankName == "cnb"){
-                                d.createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
-                            }else{
-                                d.createBank(bankName, formatPlatform(row["nakup"].ToString()),
-                                    formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
-                            }
-                            Currencies.Find(Currency => Currency.name == row["kód"].ToString()).dates.Add(d);
-                        }
-                    }else if (c != null)
-                    {    //neexistuje měna, mám novou vytvořenou
-                         // v nové právě vytvořené měně nemůže být datum, vytvoř ho a vše přidej
-                        d = new Date(DateTime.ParseExact(myDate, "dd.MM.yyyy", CultureInfo.InvariantCulture));
-                        if (bankName == "cnb"){
-                            d.createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
-                        }else{
-                            d.createBank(bankName, formatPlatform(row["nakup"].ToString()),
-                                    formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
-                        }
-                        c.dates.Add(d);
-                        Currencies.Add(c);
+                    List<string> lines = File.ReadAllLines(file).ToList();
+                    string[] tmp = Regex.Split(file, @"\D+");
+                    DateTime myDate = DateTime.ParseExact(tmp[1] + "." + tmp[2] + "." + tmp[3], "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                    string bankName = "";
+                    DataTable table = new DataTable();
+                    if (file.Contains("cnb"))
+                    {
+                        bankName = "cnb";
+                        createTable(table, lines, '|', 1);
                     }
-                }*/
+                    else if (!file.Contains("last"))
+                    {
+                        bankName = lines[0].Split(" ")[1];
+                        createTable(table, lines, ';', 1);
+                    }
+                    loadCurrenciesToList(table);
+                    foreach (Currency curr in Currencies)
+                    {
+                        if (!curr.dates.Any(Date => Date.date.Day == myDate.Day &&
+                            Date.date.Month == myDate.Month && Date.date.Year == myDate.Year))
+                        {
+                            curr.dates.Add(new Date(myDate));
+                        }
+                    }
+                    loadBanksToDates(table, bankName, myDate);
+                }
 
             }
 
@@ -172,7 +130,7 @@ namespace STIProkoratKrausnerBroz.Models
             foreach (DataRow row in table.Rows)
             {
                 if (!Currencies.Any(Currency => Currency.name == row["kód"].ToString()) && 
-                    monitoredCurrencies.Contains(row["kód"].ToString())){
+                    MonitoredCurrencies.Contains(row["kód"].ToString())){
                     Currencies.Add(new Currency(row["kód"].ToString(), row["země"].ToString()));
                 }
             }

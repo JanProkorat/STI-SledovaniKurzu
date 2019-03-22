@@ -18,6 +18,7 @@
     <Content Remove="Views\Home\Contact.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
     <Content Remove="wwwroot\js\moment.js" />
+    <Content Remove="wwwroot\css\site.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\moment.js" />
