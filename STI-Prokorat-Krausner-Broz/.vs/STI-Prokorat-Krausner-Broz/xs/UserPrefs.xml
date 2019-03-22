@@ -1,23 +1,21 @@
 ﻿<Properties StartupConfiguration="{78DDD72E-BE26-4117-B366-44DA623AC37F}|Default">
   <MonoDevelop.Ide.ItemProperties.STI-Prokorat-Krausner-Broz PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="STI-Prokorat-Krausner-Broz/Controllers/HomeController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="STI-Prokorat-Krausner-Broz/wwwroot/js/Scripts.js">
     <Files>
-      <File FileName="STI-Prokorat-Krausner-Broz/Models/ToolsClass.cs" Line="73" Column="10" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/TableView.cshtml" Line="64" Column="22" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Models/ToolsClass.cs" Line="31" Column="90" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/TableView.cshtml" Line="5" Column="50" />
       <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/css/Styles.css" Line="56" Column="15" />
-      <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/js/Scripts.js" Line="144" Column="58" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Models/TableObject.cs" Line="16" Column="75" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Shared/_Layout.cshtml" Line="10" Column="41" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Controllers/HomeController.cs" Line="34" Column="13" />
+      <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/js/Scripts.js" Line="14" Column="90" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Controllers/HomeController.cs" Line="30" Column="50" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Models/TableData.cs" Line="78" Column="94" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/Index.cshtml" Line="5" Column="50" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="STI-Prokorat-Krausner-Broz" expanded="True">
             <Node name="STI-Prokorat-Krausner-Broz" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="HomeController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
@@ -25,7 +23,9 @@
               </Node>
               <Node name="wwwroot" expanded="True">
                 <Node name="css" expanded="True" />
-                <Node name="js" expanded="True" />
+                <Node name="js" expanded="True">
+                  <Node name="Scripts.js" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>

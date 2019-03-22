@@ -2,7 +2,7 @@
 @using System.Data
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Kraušner, Prokorát, Brož - Grafy";
+    ViewData["Title"] = "Kraušner, Prokorát, Brož";
 }
 <div class="currencyContainer" id="audDiv">
     <div class="graphCanvasDiv">
@@ -130,7 +130,7 @@
     let currencyNames = [];
     @{
 
-        foreach (var d in Model.Currencies[0].dates)
+        foreach (var d in Model.Currencies[0].Dates)
         {
             @:dates.push("@d.date.ToString()");
         }
@@ -142,8 +142,8 @@
                 @:currenciesSales.push([]);
                 @:currenciesPurchases.push([]);
             @:}
-            foreach(var date in curr.dates){
-                foreach(var bank in date.banks){
+            foreach(var date in curr.Dates){
+                foreach(var bank in date.Banks){
                     @:if(bankNames.length < 5){
                         @:bankNames.push("@bank.name");
                     @:}

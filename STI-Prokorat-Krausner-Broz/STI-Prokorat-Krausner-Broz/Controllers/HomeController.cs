@@ -20,21 +20,31 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 
         public IActionResult Index()
         {
-
             this.downloadTXT();
             this.setTimerAndStart();
             t.createCurrency("tmp_files/");
+            sortCurrencies(t);
             return View(t);
+        }
+
+        private void sortCurrencies(ToolsClass t)
+        {
+            t.sortCurrencies();
+            foreach(Currency c in t.Currencies)
+            {
+                c.sortDates();
+                foreach(Date d in c.Dates)
+                {
+                    d.sortBanks();
+                }
+            }
+
         }
 
         public ActionResult TableView(){
             TableData td = new TableData();
             td.loadFiles("tmp_files/");
             td.sortList();
-            foreach (TableObject to in td.Tables)
-            {
-                Console.WriteLine(to.bankName + " " + to.date.ToString());
-            }
             return View(td);
         }
 

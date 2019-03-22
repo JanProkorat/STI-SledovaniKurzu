@@ -76,9 +76,8 @@ namespace STIProkoratKrausnerBroz.Models
         internal void sortList()
         {
             List<TableObject> tmp = Tables.OrderBy(TableObject => TableObject.date).ToList();
-            List<TableObject> x = new List<TableObject>();
-            Tables = x;
-            for(int i = tmp.Count-1; i >= 0; i--)
+            Tables.Clear();
+            for (int i = tmp.Count-1; i >= 0; i--)
             {
                 Tables.Add(tmp[i]);
             }

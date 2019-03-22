@@ -26,6 +26,15 @@ namespace STIProkoratKrausnerBroz.Models
                 "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
         }
 
+        internal void sortCurrencies()
+        {
+            List<Currency> tmp = Currencies.OrderBy(Currency => Currency.state).ToList();
+            Currencies.Clear();
+            for (int i = tmp.Count - 1; i >= 0; i--)
+            {
+                Currencies.Add(tmp[i]);
+            }
+        }
 
         public String getExchangeListUrl(string name)
         {
@@ -94,10 +103,10 @@ namespace STIProkoratKrausnerBroz.Models
                     loadCurrenciesToList(table);
                     foreach (Currency curr in Currencies)
                     {
-                        if (!curr.dates.Any(Date => Date.date.Day == myDate.Day &&
+                        if (!curr.Dates.Any(Date => Date.date.Day == myDate.Day &&
                             Date.date.Month == myDate.Month && Date.date.Year == myDate.Year))
                         {
-                            curr.dates.Add(new Date(myDate));
+                            curr.Dates.Add(new Date(myDate));
                         }
                     }
                     loadBanksToDates(table, bankName, myDate);
@@ -112,11 +121,11 @@ namespace STIProkoratKrausnerBroz.Models
                 foreach(Currency curr in Currencies){
                     if(curr.name == row["kód"].ToString()){
                         if (bankName == "cnb"){
-                            curr.dates.Find(Date => Date.date == localDate).
+                            curr.Dates.Find(Date => Date.date == localDate).
                             createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
                         }
                         else{
-                            curr.dates.Find(Date => Date.date == localDate).
+                            curr.Dates.Find(Date => Date.date == localDate).
                             createBank(bankName, formatPlatform(row["nakup"].ToString()),
                             formatPlatform(row["prodej"].ToString()), formatPlatform(row["stred"].ToString()));
                         }

@@ -11,7 +11,7 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 
-function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, dataArray) {
+function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
     let labels = [];
     var dateFormat = 'DD/MM/YYYY'; 
     for(var i in dates){
@@ -19,7 +19,7 @@ function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, data
         labels.push(moment(splitedData[0], dateFormat));
     }
     new Chart(document.getElementById(canvasName), {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: dates,
         datasets: [
@@ -27,27 +27,42 @@ function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, data
                     data: dataArray[0],
                     label: bankNames[0],
                     borderColor: randomColor(),
-                    fill: false
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    borderWidth: 2
                 }, {
                     data: dataArray[1],
                     label: bankNames[1],
                     borderColor: randomColor(),
-                    fill: false
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    borderWidth: 2
                 }, {
                     data: dataArray[2],
                     label: bankNames[2],
                     borderColor: randomColor(),
-                    fill: false
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    borderWidth: 2
                 }, {
                     data: dataArray[3],
-                    label: bankNames[3],
-                    borderColor: randomColor(),
-                    fill: false
-                }, {
-                    data: dataArray[4],
                     label: bankNames[4],
                     borderColor: randomColor(),
-                    fill: false
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    borderWidth: 2
+                }, {
+                    data: dataArray[4],
+                    label: bankNames[3],
+                    borderColor: randomColor(),
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    borderWidth: 2
                 }
             ]
       },
@@ -63,7 +78,8 @@ function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, data
                 unitStepSize: 1,
                 distribution: 'series',
                 ticks:{
-                    source: 'labels'
+                    source: 'labels',
+                    autoSkip: true
                 }
             }],
             yAxes:[{
@@ -76,7 +92,7 @@ function createCurrencySaleGraph(canvasName, currencyName, bankName, dates, data
 }
 
 
-function createCurrencyPurchaseGraph(canvasName, currencyName, bankName, dates, dataArray) {
+function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates, dataArray) {
     let labels = [];
     var dateFormat = 'DD/MM/YYYY'; 
     for(var i in dates){
@@ -105,12 +121,12 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankName, dates, 
                     fill: false
                 }, {
                     data: dataArray[3],
-                    label: bankNames[3],
+                    label: bankNames[4],
                     borderColor: randomColor(),
                     fill: false
                 }, {
                     data: dataArray[4],
-                    label: bankNames[4],
+                    label: bankNames[3],
                     borderColor: randomColor(),
                     fill: false
                 }
@@ -128,7 +144,8 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankName, dates, 
                 unitStepSize: 1,
                 distribution: 'series',
                 ticks:{
-                    source: 'labels'
+                    source: 'labels',
+                    autoSkip: true
                 }
             }],
             yAxes:[{
