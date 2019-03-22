@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="3600; URL=http://localhost:5000">
     <title>@ViewData["Title"] - STI_Prokorat_Krausner_Broz</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <script src="~/js/Scripts.js" type="text/javascript" asp-append-version="true"></script>
@@ -17,6 +18,7 @@
                     @Html.ActionLink("Zobrazit grafy", "Index")
                     @Html.ActionLink("Zobrazit tabulky", "TableView")
                 </div>
+
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                 @RenderBody()
             </div>
