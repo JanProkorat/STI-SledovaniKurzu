@@ -31,7 +31,10 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             TableData td = new TableData();
             td.loadFiles("tmp_files/");
             td.sortList();
-            Console.WriteLine("hotovo");
+            foreach (TableObject to in td.Tables)
+            {
+                Console.WriteLine(to.bankName + " " + to.date.ToString());
+            }
             return View(td);
         }
 

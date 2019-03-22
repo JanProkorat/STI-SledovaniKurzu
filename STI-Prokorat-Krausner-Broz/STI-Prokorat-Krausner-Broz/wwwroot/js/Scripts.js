@@ -140,39 +140,6 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankName, dates, 
     });
 }
 
-function showTable(bankName){
-    var body = document.getElementsByTagName("body")[0];
-
-    // creates a <table> element and a <tbody> element
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-
-    // creating all cells
-    for (var i = 0; i < 2; i++) {
-    // creates a table row
-        var row = document.createElement("tr");
-
-        for (var j = 0; j < 2; j++) {
-        // Create a <td> element and a text node, make the text
-        // node the contents of the <td>, and put the <td> at
-        // the end of the table row
-            var cell = document.createElement("td");
-            var cellText = document.createTextNode("cell in row "+i+", column "+j);
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-        }
-
-        // add the row to the end of the table body
-        tblBody.appendChild(row);
-    }
-  // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tbl);
-  // sets the border attribute of tbl to 2;
-  tbl.setAttribute("border", "2");
-}
-
 function showTable(divID){
     var divs = document.getElementsByClassName("tableDiv");
     for(var i = 0; i < divs.length; i++){
@@ -181,3 +148,43 @@ function showTable(divID){
     document.getElementById(divID).style.display = "block";
 }
 
+function exportTable(){
+    var divs = document.getElementsByClassName("tableDiv");
+    var elements;
+    for (var i=0; i < divs.length; i++) {
+        display = divs[i].style.display;    
+        if(display == 'block' ){
+            elements = divs[i].children;
+        }
+    }
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = elements[2];
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = elements[0].innerHTML +"-"+ elements[1].innerHTML;
+    console.log(filename);
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}

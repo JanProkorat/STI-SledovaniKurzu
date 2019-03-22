@@ -2,23 +2,23 @@
 @using System.Data
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Tabulky";
+    ViewData["Title"] = "Kraušner, Prokorát, Brož - Tabulky";
 }
 
 <div class="checkBoxDiv">
         <label class="container">
-            ČNB
-            <input type="radio" checked="checked" name="radio" id="cnbRadio" onclick="showTable('cnbTableDiv')">
-            <span class="checkmark"></span>
-        </label>
-        <label class="container">
-            ČSOB
-            <input type="radio" name="radio" id="csobRadio" onclick="showTable('csobTableDiv')">
+            RB
+            <input type="radio" name="radio" id="cnbRadio" onclick="showTable('rbTableDiv')">
             <span class="checkmark"></span>
         </label>
         <label class="container">
             ČS
-            <input type="radio" name="radio" id="csRadio" onclick="showTable('csTableDiv')">
+            <input type="radio" name="radio" id="csobRadio" onclick="showTable('csTableDiv')">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            ČSOB
+            <input type="radio" name="radio" id="csRadio" onclick="showTable('csobTableDiv')">
             <span class="checkmark"></span>
         </label>
         <label class="container">
@@ -27,11 +27,12 @@
             <span class="checkmark"></span>
         </label>
         <label class="container">
-            RB
-            <input type="radio" name="radio" id="rbRadio" onclick="showTable('rbTableDiv')">
+            ČNB
+            <input type="radio" checked="checked" name="radio" id="rbRadio" onclick="showTable('cnbTableDiv')">
             <span class="checkmark"></span>
         </label>
 </div>
+<button class="button" type="button" onclick="exportTable()">Exportovat tabulku</button>
 
 <div class="tableDiv" id="kbTableDiv">
 
@@ -60,7 +61,7 @@
     </table>
 </div>
 
-<div class="tableDiv" id="csTableDiv">
+<div class="tableDiv" id="csobTableDiv">
     <h2>Banka: @Model.Tables[1].bankName.ToUpper()</h2>
     <h2>Datum: @Model.Tables[1].date.ToString("dd.MM.yyyy")</h2>
     <table>
@@ -86,7 +87,7 @@
     </table>
 </div>
 
-<div class="tableDiv" id="rbTableDiv">
+<div class="tableDiv" id="cnbTableDiv">
     <h2>Banka: @Model.Tables[2].bankName.ToUpper()</h2>
     <h2>Datum: @Model.Tables[2].date.ToString("dd.MM.yyyy")</h2>
     <table>
@@ -112,7 +113,7 @@
     </table>
 </div>
 
-<div class="tableDiv" id="cnbTableDiv">
+<div class="tableDiv" id="rbTableDiv">
     <h2>Banka: @Model.Tables[3].bankName.ToUpper()</h2>
     <h2>Datum: @Model.Tables[3].date.ToString("dd.MM.yyyy")</h2>
     <table>
@@ -138,7 +139,7 @@
     </table>
 </div>
 
-<div class="tableDiv" id="csobTableDiv">
+<div class="tableDiv" id="csTableDiv">
     <h2>Banka: @Model.Tables[4].bankName.ToUpper()</h2>
     <h2>Datum: @Model.Tables[4].date.ToString("dd.MM.yyyy")</h2>
     <table>
@@ -163,3 +164,7 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    showTable('cnbTableDiv');
+</script>
