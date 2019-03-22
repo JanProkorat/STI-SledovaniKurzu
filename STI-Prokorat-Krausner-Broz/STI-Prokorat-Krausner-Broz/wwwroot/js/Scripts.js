@@ -12,57 +12,55 @@ function closeNav() {
 }
 
 function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
+	//console.log(dataArray[0]);
     let labels = [];
     var dateFormat = 'DD/MM/YYYY'; 
     for(var i in dates){
         var splitedData = dates[i].split(' ');
         labels.push(moment(splitedData[0], dateFormat));
-    }
+	}
+	var numbers = [];
+	var numbers2 = [];
+	var numbers3 = [];
+	var numbers4 = [];
+	var numbers5 = [];
+	for (var j in dataArray[0]) {
+		numbers.push(dataArray[0][j].replace(",", "."));
+		numbers2.push(dataArray[1][j].replace(",", "."));
+		numbers3.push(dataArray[2][j].replace(",", "."));
+		numbers4.push(dataArray[3][j].replace(",", "."));
+		numbers5.push(dataArray[4][j].replace(",", "."));
+	}
     new Chart(document.getElementById(canvasName), {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: dates,
+        labels: labels,
         datasets: [
                 { 
-                    data: dataArray[0],
+                    data: numbers,
                     label: bankNames[0],
                     borderColor: randomColor(),
-                    type: 'line',
                     fill: false,
-                    lineTension: 0,
-                    borderWidth: 2
-                }, {
-                    data: dataArray[1],
+			}, {
+					data: numbers2,
                     label: bankNames[1],
                     borderColor: randomColor(),
-                    type: 'line',
                     fill: false,
-                    lineTension: 0,
-                    borderWidth: 2
-                }, {
-                    data: dataArray[2],
+			}, {
+					data: numbers3,
                     label: bankNames[2],
                     borderColor: randomColor(),
-                    type: 'line',
                     fill: false,
-                    lineTension: 0,
-                    borderWidth: 2
-                }, {
-                    data: dataArray[3],
+			}, {
+					data: numbers4,
                     label: bankNames[4],
                     borderColor: randomColor(),
-                    type: 'line',
                     fill: false,
-                    lineTension: 0,
-                    borderWidth: 2
                 }, {
-                    data: dataArray[4],
+                    data: numbers5,
                     label: bankNames[3],
                     borderColor: randomColor(),
-                    type: 'line',
                     fill: false,
-                    lineTension: 0,
-                    borderWidth: 2
                 }
             ]
       },
@@ -93,7 +91,20 @@ function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dat
 
 
 function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates, dataArray) {
-    let labels = [];
+	//console.log(dataArray);
+	let labels = [];
+	var numbers = [];
+	var numbers2 = [];
+	var numbers3 = [];
+	var numbers4 = [];
+	var numbers5 = [];
+	for (var j in dataArray[0]) {
+		numbers.push(dataArray[0][j].replace(",","."));
+		numbers2.push(dataArray[1][j].replace(",", "."));
+		numbers3.push(dataArray[2][j].replace(",", "."));
+		numbers4.push(dataArray[3][j].replace(",", "."));
+		numbers5.push(dataArray[4][j].replace(",", "."));
+	}
     var dateFormat = 'DD/MM/YYYY'; 
     for(var i in dates){
         var splitedData = dates[i].split(' ');
@@ -101,31 +112,31 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates,
     }
     new Chart(document.getElementById(canvasName), {
       type: 'line',
-      data: {
-        labels: dates,
+		data: {
+			labels: labels,
             datasets: [
                 { 
-                    data: dataArray[0],
+                    data: numbers,
                     label: bankNames[0],
                     borderColor: randomColor(),
                     fill: false
                 }, {
-                    data: dataArray[1],
+					data: numbers2,
                     label: bankNames[1],
                     borderColor: randomColor(),
                     fill: false
                 }, {
-                    data: dataArray[2],
+					data: numbers3,
                     label: bankNames[2],
                     borderColor: randomColor(),
                     fill: false
                 }, {
-                    data: dataArray[3],
+					data: numbers4,
                     label: bankNames[4],
                     borderColor: randomColor(),
                     fill: false
                 }, {
-                    data: dataArray[4],
+					data: numbers5,
                     label: bankNames[3],
                     borderColor: randomColor(),
                     fill: false
@@ -143,7 +154,7 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates,
                 unit: 'day',
                 unitStepSize: 1,
                 distribution: 'series',
-                ticks:{
+				ticks: {
                     source: 'labels',
                     autoSkip: true
                 }
