@@ -15,12 +15,14 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
     {
         private ToolsClass t = new ToolsClass();
         Timer timer = null;
+        double Version = 1.2;
         //Timer timerTest = null;
         int i = 0;
 
         public IActionResult Index()
         {
             this.downloadTXT();
+            this.testVersion();
             this.setTimerAndStart();
             t.createCurrency("tmp_files/");
             sortCurrencies(t);
@@ -59,7 +61,8 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 
         private void Timer_Elapsed(Object stateInfo)
         {
-            downloadTXT();
+            this.downloadTXT();
+            this.testVersion();
         }
 
         private void TimerTest_Elapsed(Object stateInfo)
@@ -91,6 +94,17 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
                 {
                     t.setLastDownload();
                 }
+            }
+        }
+
+        private void testVersion()
+        {
+            if (t.testVersion(Version))
+            {
+                Console.WriteLine("Verze je aktualni");
+            }
+            else{
+                Console.WriteLine("Stahnete si novou verzi programu!");
             }
         }
 
