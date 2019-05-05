@@ -1,0 +1,33 @@
+﻿@model STIProkoratKrausnerBroz.Models.ToolsClass
+@using System.Data
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Kraušner, Prokorát, Brož";
+}
+
+<div class="tableDiv">
+    <table>
+        <thead>
+            <tr>
+                <th>Země</th>
+                <th>Měna</th>
+                <th>Nejvýhodnější prodej</th>
+                <th>Jméno banky</th>
+                <th>Nejvýhodnější nákup</th>
+                <th>Jméno banky</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BestDeals){
+                <tr>
+                    <td>@item.Country</td>
+                    <td>@item.CurrencyName</td>
+                    <td>@item.BestSale</td>
+                    <td>@item.BestSaleBank.ToUpper()</td>
+                    <td>@item.BestBuy</td>
+                    <td>@item.BestBuyBank.ToUpper()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

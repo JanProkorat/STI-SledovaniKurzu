@@ -2,31 +2,25 @@
   <MonoDevelop.Ide.ItemProperties.STI-Prokorat-Krausner-Broz PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="STI-Prokorat-Krausner-Broz/Views/Shared/_Layout.cshtml">
     <Files>
-      <File FileName="STI-Prokorat-Krausner-Broz/Models/ToolsClass.cs" Line="31" Column="90" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/TableView.cshtml" Line="5" Column="50" />
-      <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/css/Styles.css" Line="56" Column="15" />
-      <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/js/Scripts.js" Line="14" Column="90" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Controllers/HomeController.cs" Line="30" Column="50" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Models/TableData.cs" Line="78" Column="94" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/Index.cshtml" Line="5" Column="50" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Shared/_Layout.cshtml" Line="6" Column="5" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/BestDealView.cshtml" Line="18" Column="18" />
+      <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/js/Scripts.js" Line="22" Column="56" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Views/Shared/_Layout.cshtml" Line="19" Column="76" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
+          <Node name="ReportDevExpress" expanded="True" />
+          <Node />
           <Node name="STI-Prokorat-Krausner-Broz" expanded="True">
             <Node name="STI-Prokorat-Krausner-Broz" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True">
-                  <Node name="_Layout.cshtml" selected="True" />
-                </Node>
+                <Node name="Shared" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True">
-                <Node name="css" expanded="True" />
-                <Node name="js" expanded="True" />
+                <Node name="js" expanded="True">
+                  <Node name="moment.js" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>

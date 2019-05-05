@@ -17,5 +17,12 @@ namespace STIProkoratKrausnerBroz.Models
             this.bankName = bankName;
             this.table = table;
         }
+
+        public TableObject()
+        {
+            this.date = DateTime.MinValue;
+            this.bankName = "";
+            this.table = null;
+        }
     }
 }

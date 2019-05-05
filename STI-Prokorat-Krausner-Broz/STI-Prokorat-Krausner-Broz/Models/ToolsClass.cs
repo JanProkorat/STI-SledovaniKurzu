@@ -16,14 +16,42 @@ namespace STIProkoratKrausnerBroz.Models
     {
 
         public List<Currency> Currencies { get; set; }
-
         public string[] MonitoredCurrencies { get; set; }
+        public List<Deal> BestDeals { get; set; }
 
-        public ToolsClass()
-        {
+        public ToolsClass(){
             Currencies = new List<Currency>();
             MonitoredCurrencies = new string[] { "AUD", "DKK", "EUR", "HRK", "CAD", "HUF",
                 "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
+            BestDeals = new List<Deal>();
+
+        }
+
+        public void calculateBestDeals(){
+            foreach(Currency cur in Currencies){
+                Deal deal = new Deal();
+                deal.Country = cur.state;
+                deal.CurrencyName = cur.name;
+                Date date = cur.Dates.Find(d => d.date == cur.Dates.Max(Date => Date.date));
+                Console.WriteLine("Tady " + deal.BestBuy + " " + deal.BestSale);
+                Bank cnb = date.Banks.Find(bank => bank.name.ToUpper() == "CNB");
+                for(int i = 0; i < date.Banks.Count - 1; i++) {
+                    Console.WriteLine(1 +" " +deal.BestBuy + " " + deal.BestSale);
+                    if ((Math.Abs(date.Banks[i].saleVal - cnb.saleVal) > deal.BestSale) && date.Banks[i].name.ToUpper() != "CNB"){
+                        deal.BestSale = date.Banks[i].saleVal;
+                        deal.BestSaleBank = date.Banks[i].name;
+                        Console.WriteLine(deal.BestBuy + " " + deal.BestSale);
+                    }
+                    if ((Math.Abs(date.Banks[i].purchaseVal - cnb.purchaseVal) < deal.BestBuy) && date.Banks[i].name.ToUpper() != "CNB"){
+                        deal.BestBuy = date.Banks[i].purchaseVal;
+                        deal.BestBuyBank = date.Banks[i].name;
+                        Console.WriteLine(deal.BestBuy + " " + deal.BestSale);
+                    }
+                    Console.WriteLine(deal.BestBuy + " " + deal.BestSale);
+                    Console.WriteLine(" ");
+                }
+                BestDeals.Add(deal);
+            }
         }
 
         public Boolean testVersion(double versionProg)

@@ -12,13 +12,14 @@ function closeNav() {
 }
 
 function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
-	//console.log(dataArray[0]);
     let labels = [];
-    var dateFormat = 'DD/MM/YYYY'; 
     for(var i in dates){
         var splitedData = dates[i].split(' ');
-        labels.push(moment(splitedData[0], dateFormat));
-	}
+        //var splitedDate = splitedData[0].split('/');
+        //labels.push(new Date(splitedDate[2], splitedDate[1], splitedDate[0],0,0,0,0));
+        labels.push(moment(splitedData[0], "dd.MM.yyyy"));
+    }
+    console.log(labels);
     new Chart(document.getElementById(canvasName), {
       type: 'line',
       data: {
@@ -81,10 +82,11 @@ function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dat
 function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates, dataArray) {
 	//console.log(dataArray);
 	let labels = [];
-    var dateFormat = 'DD/MM/YYYY'; 
     for(var i in dates){
         var splitedData = dates[i].split(' ');
-        labels.push(moment(splitedData[0], dateFormat));
+        //var splitedDate = splitedData[0].split('/');
+        //labels.push(new Date(splitedDate[2], splitedDate[1], splitedDate[0],0,0,0,0));
+        labels.push(moment(splitedData[0], "dd.MM.yyyy"));
     }
     new Chart(document.getElementById(canvasName), {
       type: 'line',

@@ -13,7 +13,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 {
     public class HomeController : Controller
     {
-        private ToolsClass t = new ToolsClass();
+        private static ToolsClass t = new ToolsClass();
         Timer timer = null;
         double Version = 1.2;
         //Timer timerTest = null;
@@ -50,6 +50,10 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             return View(td);
         }
 
+        public ActionResult BestDealView(){
+            t.calculateBestDeals();
+            return View(t);
+        }
         private void setTimerAndStart()
         {
             AutoResetEvent autoEvent = new AutoResetEvent(false);
@@ -99,14 +103,10 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 
         private void testVersion()
         {
-            if (t.testVersion(Version))
+            if (!t.testVersion(Version))
             {
-                Console.WriteLine("Verze je aktualni");
+                TempData["msg"] = "<script> alert('Stahnete si novou verzi programu!')</script>";
             }
-            else{
-                Console.WriteLine("Stahnete si novou verzi programu!");
-            }
-            int x = 0;
         }
 
 
