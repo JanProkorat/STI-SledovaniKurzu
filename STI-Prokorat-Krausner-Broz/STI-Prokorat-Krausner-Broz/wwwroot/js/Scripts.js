@@ -14,10 +14,11 @@ function closeNav() {
 function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
     let labels = [];
     for(var i in dates){
-        var splitedData = dates[i].split(' ');
+        //var splitedData = dates[i].split(' ');
         //var splitedDate = splitedData[0].split('/');
         //labels.push(new Date(splitedDate[2], splitedDate[1], splitedDate[0],0,0,0,0));
-        labels.push(moment(splitedData[0], "dd.MM.yyyy"));
+        //labels.push(moment(splitedData[0], "dd.MM.yyyy"));
+        labels.push(new Date(dates[i]));
     }
     console.log(labels);
     new Chart(document.getElementById(canvasName), {
@@ -83,10 +84,11 @@ function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates,
 	//console.log(dataArray);
 	let labels = [];
     for(var i in dates){
-        var splitedData = dates[i].split(' ');
+        //var splitedData = dates[i].split(' ');
         //var splitedDate = splitedData[0].split('/');
         //labels.push(new Date(splitedDate[2], splitedDate[1], splitedDate[0],0,0,0,0));
-        labels.push(moment(splitedData[0], "dd.MM.yyyy"));
+        //labels.push(moment(splitedData[0], "dd.MM.yyyy"));
+        labels.push(new Date(dates[i]));
     }
     new Chart(document.getElementById(canvasName), {
       type: 'line',
@@ -170,7 +172,6 @@ function exportTable(){
     
     // Specify file name
     filename = elements[0].innerHTML +"-"+ elements[1].innerHTML;
-    console.log(filename);
     filename = filename?filename+'.xls':'excel_data.xls';
     
     // Create download link element
@@ -192,5 +193,14 @@ function exportTable(){
         
         //triggering the function
         downloadLink.click();
+    }
+}
+
+function displayRow(index) {
+    var rows = document.getElementsByClassName("dealRow");
+    if (rows[index].style.display == 'none') {
+        rows[index].style.display = 'table-row';
+    } else {
+        rows[index].style.display = 'none';
     }
 }

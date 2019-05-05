@@ -33,22 +33,16 @@ namespace STIProkoratKrausnerBroz.Models
                 deal.Country = cur.state;
                 deal.CurrencyName = cur.name;
                 Date date = cur.Dates.Find(d => d.date == cur.Dates.Max(Date => Date.date));
-                Console.WriteLine("Tady " + deal.BestBuy + " " + deal.BestSale);
                 Bank cnb = date.Banks.Find(bank => bank.name.ToUpper() == "CNB");
                 for(int i = 0; i < date.Banks.Count - 1; i++) {
-                    Console.WriteLine(1 +" " +deal.BestBuy + " " + deal.BestSale);
                     if ((Math.Abs(date.Banks[i].saleVal - cnb.saleVal) > deal.BestSale) && date.Banks[i].name.ToUpper() != "CNB"){
                         deal.BestSale = date.Banks[i].saleVal;
                         deal.BestSaleBank = date.Banks[i].name;
-                        Console.WriteLine(deal.BestBuy + " " + deal.BestSale);
                     }
                     if ((Math.Abs(date.Banks[i].purchaseVal - cnb.purchaseVal) < deal.BestBuy) && date.Banks[i].name.ToUpper() != "CNB"){
                         deal.BestBuy = date.Banks[i].purchaseVal;
                         deal.BestBuyBank = date.Banks[i].name;
-                        Console.WriteLine(deal.BestBuy + " " + deal.BestSale);
                     }
-                    Console.WriteLine(deal.BestBuy + " " + deal.BestSale);
-                    Console.WriteLine(" ");
                 }
                 BestDeals.Add(deal);
             }
@@ -57,8 +51,7 @@ namespace STIProkoratKrausnerBroz.Models
         public Boolean testVersion(double versionProg)
         {
             string url = "https://github.com/JanProkorat/STI-KontrolaVerze/blob/master/version.txt";
-            if (!this.testUrlReachable(url))
-            {
+            if (!this.testUrlReachable(url)){
                 return true;
             }
             String tmp = parseVersion(getHTML(url));
@@ -81,9 +74,17 @@ namespace STIProkoratKrausnerBroz.Models
         {
             List<Currency> tmp = Currencies.OrderBy(Currency => Currency.state).ToList();
             Currencies.Clear();
-            for (int i = tmp.Count - 1; i >= 0; i--)
-            {
+            for (int i = tmp.Count - 1; i >= 0; i--){
                 Currencies.Add(tmp[i]);
+            }
+        }
+
+        internal void sortBestDeals()
+        {
+            List<Deal> tmp = BestDeals.OrderBy(Deal=> Deal.Country).ToList();
+            BestDeals.Clear();
+            for (int i = 0; i < tmp.Count; i++){
+                BestDeals.Add(tmp[i]);
             }
         }
 

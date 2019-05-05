@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="refresh" content="3600; URL=http://localhost:5000">
     <title>@ViewData["Title"] - STI_Prokorat_Krausner_Broz</title>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <script src="~/js/Scripts.js" type="text/javascript" asp-append-version="true"></script>
     <script src="~/js/moment.js" type="text/javascript" asp-append-version="true"></script>
@@ -12,6 +13,9 @@
 </head>
     <body>
         <section>
+            <header>
+                <h3>@ViewBag.versionMsg</h3>
+            </header>
             <div class="container body-content">
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -24,8 +28,6 @@
                 @RenderBody()
             </div>
         </section>
-        <footer>
-            <p>&copy; 2019 - STI_Prokorat_Krausner_Broz</p>
-        </footer>
+
     </body>
 </html>

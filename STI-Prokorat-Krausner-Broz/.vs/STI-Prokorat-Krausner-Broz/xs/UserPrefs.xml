@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{78DDD72E-BE26-4117-B366-44DA623AC37F}|Default">
   <MonoDevelop.Ide.ItemProperties.STI-Prokorat-Krausner-Broz PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="STI-Prokorat-Krausner-Broz/Views/Shared/_Layout.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="STI-Prokorat-Krausner-Broz/Startup.cs">
     <Files>
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Home/BestDealView.cshtml" Line="18" Column="18" />
-      <File FileName="STI-Prokorat-Krausner-Broz/wwwroot/js/Scripts.js" Line="22" Column="56" />
-      <File FileName="STI-Prokorat-Krausner-Broz/Views/Shared/_Layout.cshtml" Line="19" Column="76" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Program.cs" Line="6" Column="1" />
+      <File FileName="STI-Prokorat-Krausner-Broz/Startup.cs" Line="42" Column="37" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,15 +11,9 @@
           <Node name="ReportDevExpress" expanded="True" />
           <Node />
           <Node name="STI-Prokorat-Krausner-Broz" expanded="True">
-            <Node name="STI-Prokorat-Krausner-Broz" expanded="True">
-              <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True" />
-              </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="js" expanded="True">
-                  <Node name="moment.js" selected="True" />
-                </Node>
+            <Node name="STI-Prokorat-Krausner-Broz" expanded="True" selected="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
               </Node>
             </Node>
           </Node>

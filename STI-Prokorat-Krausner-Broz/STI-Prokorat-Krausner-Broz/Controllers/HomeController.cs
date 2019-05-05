@@ -51,7 +51,15 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         }
 
         public ActionResult BestDealView(){
-            t.calculateBestDeals();
+            if(t.BestDeals.Count == 0){
+                t.calculateBestDeals();
+                t.sortBestDeals();
+            }else{
+            }
+            foreach(Deal d in t.BestDeals)
+            {
+                Console.WriteLine(d.Country);
+            }
             return View(t);
         }
         private void setTimerAndStart()
@@ -105,7 +113,9 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         {
             if (!t.testVersion(Version))
             {
-                TempData["msg"] = "<script> alert('Stahnete si novou verzi programu!')</script>";
+                ViewBag.versionMsg = "Stahnete si novou verzi programu!";
+            }else{
+                ViewBag.versionMsg = "";
             }
         }
 

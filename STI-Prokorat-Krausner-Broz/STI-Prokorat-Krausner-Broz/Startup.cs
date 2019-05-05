@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ElectronNET.API;
 
 namespace STI_Prokorat_Krausner_Broz
 {
@@ -58,6 +59,7 @@ namespace STI_Prokorat_Krausner_Broz
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
         }
     }
 }
