@@ -186,12 +186,13 @@ function exportTable(){
     }
 }
 
-function displayRow(index) {
-    var rows = document.getElementsByClassName("dealRow");
-    if (rows[index].style.display == 'none') {
-        rows[index].style.display = 'table-row';
+function displayRow(id) {
+	console.log(id);
+	var row = document.getElementById(id);
+    if (row.style.display == 'none') {
+        row.style.display = 'table-row';
     } else {
-        rows[index].style.display = 'none';
+        row.style.display = 'none';
     }
 }
 

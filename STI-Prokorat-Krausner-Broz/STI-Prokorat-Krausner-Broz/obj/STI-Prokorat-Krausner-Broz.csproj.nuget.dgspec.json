@@ -64,10 +64,6 @@
               "version": "[2.1.0, )",
               "autoReferenced": true
             },
-            "Microsoft.VisualStudio.Web.BrowserLink": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "System.Text.Encoding.CodePages": {
               "target": "Package",
               "version": "[4.5.1, )"
