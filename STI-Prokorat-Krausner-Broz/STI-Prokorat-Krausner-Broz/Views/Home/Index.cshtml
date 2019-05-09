@@ -258,64 +258,113 @@
 </div>
 <script type="text/javascript">
     let bankNames = [];
-    let dates = [];
-    let currencyNames = [];
+	var dates = [], weekDates = [], monthDates = [], m = 0, n = 0;
     @{
         foreach (var d in Model.Currencies[0].Dates){
             @:dates.push(new Date("@d.date.ToString("yyyy-MM-dd")"));
         }
-        foreach(var curr in Model.Currencies){
-            @:var currenciesSales = [];
-            @:var currenciesPurchases = [];
-/**/
-            @:var indexes = [0, 0, 0, 0, 0];
-/**/
+		@:for (var i = dates.length - 1; i > -1; i--) {
+			@:if(m < 7){
+				@:weekDates.push(dates[i]);
+				@:m++;
+			@:}
+			@:if(n < 30){
+				@:monthDates.push(dates[i]);
+				@:n++;
+			@:}
+		@:}
+        foreach (var curr in Model.Currencies)
+		{
+            @:var weekSales = [], monthSales = [], weekPurchases = [], monthPurchases = [], weekIndexes = [0, 0, 0, 0, 0], monthIndexes = [0, 0, 0, 0, 0];
             @:for(var i = 0; i < 5; i++){
-/**/
-                @:currenciesSales.push([]);
-/**/
-                @:currenciesPurchases.push([]);
-/**/
+				@:weekSales.push([]);
+				@:monthSales.push([]);
+				@:weekPurchases.push([]);
+				@:monthPurchases.push([]);
             @:}
-            foreach(var date in curr.Dates){
-                foreach(var bank in date.Banks){
+			for (var i = curr.Dates.Count - 1; i > -1; i--)
+			{
+				foreach (var bank in curr.Dates[i].Banks)
+				{
                     @:if(bankNames.length < 5){
-                        @:console.log("@bank.name");
                         @:bankNames.push("@bank.name");
                     @:}
-                    if(bank.name == "kb"){
-                        @:currenciesSales[0][indexes[0]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
-                        @:currenciesPurchases[0][indexes[0]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
-                        @:indexes[0]++;
+                    if (bank.name == "kb")
+					{
+						@:if (weekSales[0].length < 7) {
+							@:weekSales[0][weekIndexes[0]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:weekPurchases[0][weekIndexes[0]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:weekIndexes[0]++;
+						@:}
+						@:if (monthSales[0].length < 30) {
+							@:monthSales[0][monthIndexes[0]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:monthPurchases[0][monthIndexes[0]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:monthIndexes[0]++;
+						@:}
                     }
-                    if(bank.name == "rb"){
-                        @:currenciesSales[1][indexes[1]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
-                        @:currenciesPurchases[1][indexes[1]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
-                        @:indexes[1]++;
+					if (bank.name == "rb")
+					{
+						@:if (weekSales[1].length < 7) {
+							@:weekSales[1][weekIndexes[1]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:weekPurchases[1][weekIndexes[1]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:weekIndexes[1]++;
+						@:}
+						@:if (monthSales[1].length < 30) {
+							@:monthSales[1][monthIndexes[1]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:monthPurchases[1][monthIndexes[1]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:monthIndexes[1]++;
+						@:}
                     }
-                    if(bank.name == "cs"){
-                        @:currenciesSales[2][indexes[2]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
-                        @:currenciesPurchases[2][indexes[2]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
-                        @:indexes[2]++;
+					if (bank.name == "cs")
+					{
+						@:if (weekSales[2].length < 7) {
+							@:weekSales[2][weekIndexes[2]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:weekPurchases[2][weekIndexes[2]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:weekIndexes[2]++;
+						@:}
+						@:if (monthSales[2].length < 30) {
+							@:monthSales[2][monthIndexes[2]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:monthPurchases[2][monthIndexes[2]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:monthIndexes[2]++;
+						@:}
                     }
-                    if(bank.name == "cnb"){
-                        @:currenciesSales[3][indexes[3]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
-                        @:currenciesPurchases[3][indexes[3]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
-                        @:indexes[3]++;
+					if (bank.name == "cnb")
+					{
+						@:if (weekSales[3].length < 7) {
+							@:weekSales[3][weekIndexes[3]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:weekPurchases[3][weekIndexes[3]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:weekIndexes[3]++;
+						@:}
+						@:if (monthSales[3].length < 30) {
+							@:monthSales[3][monthIndexes[3]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:monthPurchases[3][monthIndexes[3]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:monthIndexes[3]++;
+						@:}
                     }
-                    if(bank.name == "csob"){
-                        @:currenciesSales[4][indexes[4]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
-                        @:currenciesPurchases[4][indexes[4]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
-                        @:indexes[4]++;
+					if (bank.name == "csob")
+					{
+						@:if (weekSales[4].length < 7) {
+							@:weekSales[4][weekIndexes[4]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:weekPurchases[4][weekIndexes[4]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:weekIndexes[4]++;
+						@:}
+						@:if (monthSales[4].length < 30) {
+							@:monthSales[4][monthIndexes[4]] = parseFloat("@bank.saleVal.ToString().Replace(",", ".")");
+							@:monthPurchases[4][monthIndexes[4]] = parseFloat("@bank.purchaseVal.ToString().Replace(",", ".")");
+							@:monthIndexes[4]++;
+						@:}
                     }
 
-                }
+				}
 
-            }
-            @:showGraph("@curr.name.ToLower()"+"-week-sale-canvas", "@curr.name.ToLower()"+"-month-sale-canvas", "@curr.name.ToLower()"+"-week-purchase-canvas", "@curr.name.ToLower()"+"-month-purchase-canvas", "@curr.name", dates, bankNames, currenciesSales, currenciesPurchases);
-        }
-     }
-    hideDiv('currencyContainer', 'monthCurrencyContainer');
+			}
+			@:createCurrencySaleGraph("@curr.name.ToLower()"+"-week-sale-canvas", "@curr.name", bankNames, weekDates, weekSales);
+			@:createCurrencyPurchaseGraph("@curr.name.ToLower()"+"-week-purchase-canvas", "@curr.name", bankNames, weekDates, weekPurchases);
+			@:createCurrencySaleGraph("@curr.name.ToLower()"+"-month-sale-canvas", "@curr.name", bankNames, monthDates, monthSales);
+			@:createCurrencyPurchaseGraph("@curr.name.ToLower()"+"-month-purchase-canvas", "@curr.name", bankNames, monthDates, monthPurchases);
+		}
+	}
+	hideDiv('currencyContainer', 'monthCurrencyContainer');
 </script>
 
 

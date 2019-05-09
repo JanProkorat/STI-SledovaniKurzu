@@ -196,30 +196,6 @@ function displayRow(id) {
     }
 }
 
-function showGraph(canvasWeekSaleName, canvasMonthSaleName, canvasWeekPurchaseName, canvasMonthPurchaseName, currName, dates, bankNames, currenciesSales, currenciesPurchases){
-    var weekDates = [], monthDates = [], weekSales = [], monthSales = [], weekPurchases = [], monthPurchases = [];
-var j = 0, k = 0;
-    for (var i = dates.length - 1; i > -1; i--) {
-        if(j < 7){
-            weekDates.push(dates[i]);
-            weekSales.push(currenciesSales[i]);
-            weekPurchases.push(currenciesPurchases[i]);
-            j++;
-        }
-        if(k < 30){
-            monthDates.push(dates[i]);
-            monthSales.push(currenciesSales[i]);
-            monthPurchases.push(currenciesPurchases[i]);
-            k++;
-        }
-    }
-
-    createCurrencySaleGraph(canvasWeekSaleName, currName, bankNames, weekDates, weekSales);
-    createCurrencyPurchaseGraph(canvasWeekPurchaseName, currName, bankNames, weekDates, weekPurchases);  
-    createCurrencySaleGraph(canvasMonthSaleName, currName, bankNames, monthDates, monthSales);
-    createCurrencyPurchaseGraph(canvasMonthPurchaseName, currName, bankNames, monthDates, monthPurchases);
-}
-
 function hideDiv(hideClassName, showClassName) {
     var hideDivs = document.getElementsByClassName(hideClassName);
     var showDivs = document.getElementsByClassName(showClassName);
