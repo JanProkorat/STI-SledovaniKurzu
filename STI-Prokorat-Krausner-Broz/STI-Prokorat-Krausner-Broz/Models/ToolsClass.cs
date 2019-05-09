@@ -44,6 +44,16 @@ namespace STIProkoratKrausnerBroz.Models
                         deal.BestBuyBank = date.Banks[i].name;
                     }
                 }
+                if (cur.Dates.Count == 1){
+                    deal.Recommendation = "Nedostatek dat";
+                }else{
+                    if (cur.Dates[cur.Dates.Count - 1].Banks.Find(Bank => Bank.name.ToLower() == "cnb").saleVal <=
+                        cur.Dates[cur.Dates.Count - 2].Banks.Find(Bank => Bank.name.ToLower() == "cnb").saleVal){
+                        deal.Recommendation = "Kupuj";
+                    }else {
+                        deal.Recommendation = "Prodej";
+                    }
+                }
                 BestDeals.Add(deal);
             }
         }

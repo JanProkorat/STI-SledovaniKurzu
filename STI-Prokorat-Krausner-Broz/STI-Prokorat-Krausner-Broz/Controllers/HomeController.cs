@@ -44,8 +44,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         }
 
         public ActionResult TableView(){
-            TableData td = new TableData();
-            td.loadFiles("tmp_files/");
+            TableData td = new TableData("tmp_files/");
             td.sortList();
             return View(td);
         }

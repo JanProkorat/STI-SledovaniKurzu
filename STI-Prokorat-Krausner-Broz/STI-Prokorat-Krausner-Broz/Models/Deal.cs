@@ -16,8 +16,9 @@ namespace STIProkoratKrausnerBroz.Models
         public string BestSaleBank { get; set; }
         public double BestBuy { get; set; }
         public string BestBuyBank { get; set; }
+        public string Recommendation { get; set; }
 
-        public Deal(string country, string currencyName, double bestSale, string bestSaleBank, double bestBuy, string bestBuyBank)
+        public Deal(string country, string currencyName, double bestSale, string bestSaleBank, double bestBuy, string bestBuyBank, string recommendation)
         {
             Country = country;
             CurrencyName = currencyName;
@@ -25,6 +26,7 @@ namespace STIProkoratKrausnerBroz.Models
             BestSaleBank = bestSaleBank;
             BestBuy = bestBuy;
             BestBuyBank = bestBuyBank;
+            Recommendation = recommendation;
         }
 
         public Deal(){
@@ -34,6 +36,7 @@ namespace STIProkoratKrausnerBroz.Models
             BestSaleBank = "";
             BestBuy = double.MaxValue;
             BestBuyBank = "";
+            Recommendation = "";
         }
     }
 }

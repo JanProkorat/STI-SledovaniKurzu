@@ -3,11 +3,6 @@
 header{
     text-align:center;
 }
-.currencyContainer {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-}
 .graphCanvasDiv{
     width: 45%;
 }
@@ -165,4 +160,8 @@ th {
     height: 8px;
     border-radius: 50%;
     background: white;
+}
+#leftDiv, #rightDiv {
+    float: left;
+    width: 45%;
 }

@@ -4,6 +4,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace STIProkoratKrausnerBroz.Models
@@ -12,13 +13,14 @@ namespace STIProkoratKrausnerBroz.Models
     {
         public List<TableObject> Tables { get; set; }
 
-        public TableData()
+        public TableData(string filePath)
         {
-            this.Tables = new List<TableObject>();
+            this.Tables = loadFiles(filePath);
         }
 
-        public void loadFiles(string folderPath)
+        public List<TableObject> loadFiles(string folderPath)
         {
+            List<TableObject> tmpList = new List<TableObject>();
             foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt"))
             {
                 if (file != "tmp_files/last.txt")
@@ -30,48 +32,66 @@ namespace STIProkoratKrausnerBroz.Models
                     if (file.Contains("cnb"))
                     {
                         bankName = "cnb";
-                        createTable(table, lines, '|', 1);
+                        createTable(bankName,table, lines, '|', 1);
                     }
                     else if (!file.Contains("last"))
                     {
                         bankName = lines[0].Split(" ")[1];
-                        createTable(table, lines, ';', 1);
+                        createTable(bankName, table, lines, ';', 1);
                     }
-                    Tables.Add(new TableObject(tmp[1] + "." + tmp[2] + "." + tmp[3], bankName, table));
+                    tmpList.Add(new TableObject(tmp[1] + "." + tmp[2] + "." + tmp[3], bankName, table));
                 }
-
             }
+            calculateProfit(tmpList);
+            return tmpList;
         }
 
-        private void createTable(DataTable dt, List<string> lines, char separator, int skip)
+        private void createTable(string bankName, DataTable dt, List<string> lines, char separator, int skip)
         {
+            string[] MonitoredCurrencies = new string[] { "AUD", "DKK", "EUR", "HRK", "CAD", "HUF",
+                "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
             for (int i = 0; i < 1; i++)
             {
                 lines.RemoveAt(i);
             }
             lines.RemoveAll(string.IsNullOrWhiteSpace);
             string[] tmp = lines[0].Split(separator);
-            string[] headers = tmp.Distinct().ToArray();
+            List<string> headers = tmp.Distinct().ToList();
+            if(bankName.ToLower() != "cnb"){
+                headers.Add("Zisk na měně");
+            }
             foreach (string header in headers)
             {
-
                 dt.Columns.Add(new DataColumn(header.ToLower()));
             }
             foreach (string itemLine in lines.Skip(skip))
             {
                 string[] items = itemLine.Split(separator);
                 DataRow dr = dt.NewRow();
-                for (int i = 0; i < tmp.Length; i++)
-                {
-                    if (i > headers.Length - 1)
-                    {
+                for (int i = 0; i < tmp.Length; i++){
+                    if (i > headers.Count - 1){
                         continue;
                     }
-                    dr[i] = items[i];
+                    if (bankName.ToLower() != "cnb"){
+                        if (i == headers.Count - 1){
+                            dr[i] = "zatim nic";
+                        }
+                        if (i < headers.Count - 1){
+                            dr[i] = items[i];
+                        }
+                    }else{
+                        dr[i] = items[i];
+                    }
+
+
                 }
-                dt.Rows.Add(dr);
+                if (MonitoredCurrencies.Contains(dr["kód"].ToString())){
+                    dt.Rows.Add(dr);
+                }
             }
+
         }
+
 
         internal void sortList()
         {
@@ -82,6 +102,37 @@ namespace STIProkoratKrausnerBroz.Models
                 Tables.Add(tmp[i]);
             }
 
+        }
+
+        private void calculateProfit(List<TableObject> dataTable)
+        {
+            foreach(TableObject to in dataTable){
+                if (to.bankName.ToUpper() == "CNB"){
+                    continue;
+                }else{
+                    foreach(DataRow row in to.table.Rows) { 
+                        row["zisk na měně"] = Math.Round(formatPlatform(row["prodej"].ToString()) - formatPlatform(row["nakup"].ToString()),3);
+                    }
+                }
+            }
+        }
+
+        private double formatPlatform(String s)
+        {
+            if (s.Trim() == "-")
+            {
+                s = "0";
+            }
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                //Console.WriteLine(s);
+                return double.Parse(s.Replace(",", "."));
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return double.Parse(s.Replace(".", ","));
+            }
+            return double.Parse(s);
         }
     }
 }

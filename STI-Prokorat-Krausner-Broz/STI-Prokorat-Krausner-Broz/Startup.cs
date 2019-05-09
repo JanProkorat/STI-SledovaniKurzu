@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ElectronNET.API;
+using Newtonsoft.Json.Serialization;
 
 namespace STI_Prokorat_Krausner_Broz
 {
@@ -32,8 +33,7 @@ namespace STI_Prokorat_Krausner_Broz
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,16 +42,16 @@ namespace STI_Prokorat_Krausner_Broz
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+			}
             else
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {

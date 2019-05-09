@@ -12,19 +12,14 @@ function closeNav() {
 }
 
 function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
-    let labels = [];
-    for(var i in dates){
-        //var splitedData = dates[i].split(' ');
-        //var splitedDate = splitedData[0].split('/');
-        //labels.push(new Date(splitedDate[2], splitedDate[1], splitedDate[0],0,0,0,0));
-        //labels.push(moment(splitedData[0], "dd.MM.yyyy"));
-        labels.push(new Date(dates[i]));
-    }
-    console.log(labels);
+	/*let labels = [];
+	for (var i in dates) {
+		labels.push(new Date(dates[i]));
+	}*/
     new Chart(document.getElementById(canvasName), {
       type: 'line',
       data: {
-        labels: labels,
+        labels: dates,
         datasets: [
 			{
 					data: dataArray[0],
@@ -81,19 +76,14 @@ function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dat
 
 
 function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates, dataArray) {
-	//console.log(dataArray);
-	let labels = [];
+	/*let labels = [];
     for(var i in dates){
-        //var splitedData = dates[i].split(' ');
-        //var splitedDate = splitedData[0].split('/');
-        //labels.push(new Date(splitedDate[2], splitedDate[1], splitedDate[0],0,0,0,0));
-        //labels.push(moment(splitedData[0], "dd.MM.yyyy"));
         labels.push(new Date(dates[i]));
-    }
+    }*/
     new Chart(document.getElementById(canvasName), {
       type: 'line',
 		data: {
-			labels: labels,
+			labels: dates,
             datasets: [
 				{
 					data: dataArray[0],
@@ -202,5 +192,38 @@ function displayRow(index) {
         rows[index].style.display = 'table-row';
     } else {
         rows[index].style.display = 'none';
+    }
+}
+
+function showGraph(canvasWeekSaleName, canvasMonthSaleName, canvasWeekPurchaseName, canvasMonthPurchaseName, currName, dates, bankNames, currenciesSales, currenciesPurchases){
+    var weekDates = [], monthDates = [], weekSales = [], monthSales = [], weekPurchases = [], monthPurchases = [];
+var j = 0, k = 0;
+    for (var i = dates.length - 1; i > -1; i--) {
+        if(j < 7){
+            weekDates.push(dates[i]);
+            weekSales.push(currenciesSales[i]);
+            weekPurchases.push(currenciesPurchases[i]);
+            j++;
+        }
+        if(k < 30){
+            monthDates.push(dates[i]);
+            monthSales.push(currenciesSales[i]);
+            monthPurchases.push(currenciesPurchases[i]);
+            k++;
+        }
+    }
+
+    createCurrencySaleGraph(canvasWeekSaleName, currName, bankNames, weekDates, weekSales);
+    createCurrencyPurchaseGraph(canvasWeekPurchaseName, currName, bankNames, weekDates, weekPurchases);  
+    createCurrencySaleGraph(canvasMonthSaleName, currName, bankNames, monthDates, monthSales);
+    createCurrencyPurchaseGraph(canvasMonthPurchaseName, currName, bankNames, monthDates, monthPurchases);
+}
+
+function hideDiv(hideClassName, showClassName) {
+    var hideDivs = document.getElementsByClassName(hideClassName);
+    var showDivs = document.getElementsByClassName(showClassName);
+    for(var i = 0; i < hideDivs.length; i++){
+        hideDivs[i].style.display = "none";
+        showDivs[i].style.display = "block";
     }
 }

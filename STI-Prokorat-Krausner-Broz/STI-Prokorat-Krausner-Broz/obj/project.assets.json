@@ -8295,7 +8295,6 @@
       "path": "system.diagnostics.contracts/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12509,11 +12508,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz.csproj",
+      "projectUniqueName": "/Users/jan/Library/Mobile Documents/com~apple~CloudDocs/BP - test soubory/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz.csproj",
       "projectName": "STI-Prokorat-Krausner-Broz",
-      "projectPath": "/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz.csproj",
+      "projectPath": "/Users/jan/Library/Mobile Documents/com~apple~CloudDocs/BP - test soubory/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz.csproj",
       "packagesPath": "/Users/jan/.nuget/packages/",
-      "outputPath": "/Users/jan/Git/STI-SledovaniKurzu/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/",
+      "outputPath": "/Users/jan/Library/Mobile Documents/com~apple~CloudDocs/BP - test soubory/STI-Prokorat-Krausner-Broz/STI-Prokorat-Krausner-Broz/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
