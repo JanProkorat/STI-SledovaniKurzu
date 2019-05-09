@@ -4,256 +4,258 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Kraušner, Prokorát, Brož";
 }
-<div class="checkBoxDiv">
-    <label class="container" id="weekLabel">
-        Týden
-        <input type="radio" name="radio" id="weekRadio" onclick="hideDiv('monthCurrencyContainer', 'currencyContainer')">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container" id="monthLabel">
-        Měsíc
-        <input type="radio" name="radio" id="monthRadio" checked="checked" onclick="hideDiv('currencyContainer', 'monthCurrencyContainer')">
-        <span class="checkmark"></span>
-    </label>
-</div>
-<div class="currencyContainer" id="audDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="aud-week-purchase-canvas"></canvas>
+<div id="graphsDiv">
+    <div class="checkBoxDiv">
+        <label class="container" id="weekLabel">
+            Týden
+            <input type="radio" name="radio" id="weekRadio" onclick="hideDiv('monthCurrencyContainer', 'currencyContainer')">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container" id="monthLabel">
+            Měsíc
+            <input type="radio" name="radio" id="monthRadio" checked="checked" onclick="hideDiv('currencyContainer', 'monthCurrencyContainer')">
+            <span class="checkmark"></span>
+        </label>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="aud-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="audDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="aud-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="aud-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="dkkDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="dkk-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="dkkDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="dkk-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="dkk-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="dkk-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="eurDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="eur-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="eur-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="eurDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="eur-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="hrkDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="hrk-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="hrk-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="eur-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="cadDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="cad-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="cad-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="hrkDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="hrk-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="hufDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="huf-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="huf-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="hrk-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="nokDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="nok-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="nok-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="cadDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="cad-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="plnDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="pln-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="pln-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="cad-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="ronDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="ron-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="ron-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="hufDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="huf-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="rubDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="rub-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="rub-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="huf-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="sekDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="sek-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="sek-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="nokDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="nok-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="chfDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="chf-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="chf-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="nok-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="jpyDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="jpy-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="jpy-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="plnDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="pln-week-purchase-canvas"></canvas>
+    <div class="currencyContainer" id="usdDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="usd-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="usd-week-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="pln-week-sale-canvas"></canvas>
+    <div class="currencyContainer" id="gbpDiv">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="gbp-week-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="gbp-week-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="ronDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="ron-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="aud-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="aud-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="ron-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="dkk-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="dkk-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="rubDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="rub-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="eur-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="eur-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="rub-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="hrk-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="hrk-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="sekDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="sek-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="cad-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="cad-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="sek-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="huf-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="huf-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="chfDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="chf-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="nok-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="nok-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="chf-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="pln-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="pln-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="jpyDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="jpy-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="ron-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="ron-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="jpy-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="rub-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="rub-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="usdDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="usd-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="sek-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="sek-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="usd-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="chf-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="chf-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="currencyContainer" id="gbpDiv">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="gbp-week-purchase-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="jpy-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="jpy-month-sale-canvas"></canvas>
+        </div>
     </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="gbp-week-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="usd-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="usd-month-sale-canvas"></canvas>
+        </div>
     </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="aud-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="aud-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="dkk-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="dkk-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="eur-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="eur-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="hrk-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="hrk-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="cad-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="cad-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="huf-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="huf-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="nok-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="nok-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="pln-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="pln-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="ron-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="ron-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="rub-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="rub-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="sek-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="sek-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="chf-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="chf-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="jpy-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="jpy-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="usd-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="usd-month-sale-canvas"></canvas>
-    </div>
-</div>
-<div class="monthCurrencyContainer">
-    <div class="graphCanvasDiv" id="leftDiv">
-        <canvas class="graphCanvas" id="gbp-month-purchase-canvas"></canvas>
-    </div>
-    <div class="graphCanvasDiv" id="rightDiv">
-        <canvas class="graphCanvas" id="gbp-month-sale-canvas"></canvas>
+    <div class="monthCurrencyContainer">
+        <div class="graphCanvasDiv" id="leftDiv">
+            <canvas class="graphCanvas" id="gbp-month-purchase-canvas"></canvas>
+        </div>
+        <div class="graphCanvasDiv" id="rightDiv">
+            <canvas class="graphCanvas" id="gbp-month-sale-canvas"></canvas>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -365,6 +367,7 @@
 		}
 	}
 	hideDiv('currencyContainer', 'monthCurrencyContainer');
+    setInterval("$('#graphsDiv').load('HomeController/Index')",2000);
 </script>
 
 

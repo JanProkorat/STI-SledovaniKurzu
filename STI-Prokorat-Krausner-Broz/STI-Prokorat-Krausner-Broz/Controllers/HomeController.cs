@@ -13,7 +13,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 {
     public class HomeController : Controller
     {
-        private static ToolsClass t = new ToolsClass();
+        private ToolsClass t = new ToolsClass();
         Timer timer = null;
         double Version = 1.2;
         //Timer timerTest = null;
@@ -29,10 +29,10 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             return View(t);
         }
 
-        private void sortCurrencies(ToolsClass t)
+        private void sortCurrencies(ToolsClass tc)
         {
-            t.sortCurrencies();
-            foreach(Currency c in t.Currencies)
+            tc.sortCurrencies();
+            foreach(Currency c in tc.Currencies)
             {
                 c.sortDates();
                 foreach(Date d in c.Dates)
@@ -50,17 +50,16 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         }
 
         public ActionResult BestDealView(){
-            if(t.BestDeals.Count == 0){
-                t.calculateBestDeals();
-                t.sortBestDeals();
-            }else{
-            }
-            foreach(Deal d in t.BestDeals)
-            {
-                Console.WriteLine(d.Country);
-            }
-            return View(t);
+            ToolsClass t2 = new ToolsClass();
+            t2.createCurrency("tmp_files/");
+            sortCurrencies(t2);
+            t2.calculateBestDeals();
+            t2.sortBestDeals();
+            var deals = t2.BestDeals;
+            ViewData["deals"] = deals;
+            return View();
         }
+
         private void setTimerAndStart()
         {
             AutoResetEvent autoEvent = new AutoResetEvent(false);
@@ -117,7 +116,6 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
                 ViewBag.versionMsg = "";
             }
         }
-
 
     }
 }

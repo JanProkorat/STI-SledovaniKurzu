@@ -187,7 +187,6 @@ function exportTable(){
 }
 
 function displayRow(id) {
-	console.log(id);
 	var row = document.getElementById(id);
     if (row.style.display == 'none') {
         row.style.display = 'table-row';
