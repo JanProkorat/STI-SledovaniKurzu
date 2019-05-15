@@ -26,13 +26,14 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             this.setTimerAndStart();
             t.createCurrency("tmp_files/");
             sortCurrencies(t);
+            t.calculateCorrelationCoeficient();
             return View(t);
         }
 
-        private void sortCurrencies(ToolsClass t)
+        private void sortCurrencies(ToolsClass tc)
         {
-            t.sortCurrencies();
-            foreach(Currency c in t.Currencies)
+            tc.sortCurrencies();
+            foreach(Currency c in tc.Currencies)
             {
                 c.sortDates();
                 foreach(Date d in c.Dates)
@@ -44,10 +45,28 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         }
 
         public ActionResult TableView(){
-            TableData td = new TableData();
-            td.loadFiles("tmp_files/");
+            TableData td = new TableData("tmp_files/");
             td.sortList();
             return View(td);
+        }
+
+        public ActionResult BestDealView(){
+            ToolsClass t2 = new ToolsClass();
+            t2.createCurrency("tmp_files/");
+            sortCurrencies(t2);
+            t2.calculateBestDeals();
+            t2.sortBestDeals();
+            var deals = t2.BestDeals;
+            ViewData["deals"] = deals;
+            return View();
+        }
+
+        public ActionResult CoeficientView(){
+            ToolsClass t3 = new ToolsClass();
+            t3.createCurrency("tmp_files/");
+            sortCurrencies(t3);
+            t3.calculateCorrelationCoeficient();
+            return View(t3);
         }
 
         private void setTimerAndStart()
@@ -101,13 +120,11 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
         {
             if (t.testVersion(Version))
             {
-                Console.WriteLine("Verze je aktualni");
-            }
-            else{
-                Console.WriteLine("Stahnete si novou verzi programu!");
+                ViewBag.versionMsg = "Stahnete si novou verzi programu!";
+            }else{
+                ViewBag.versionMsg = "";
             }
         }
-
 
     }
 }

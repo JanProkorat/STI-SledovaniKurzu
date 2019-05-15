@@ -12,17 +12,14 @@ function closeNav() {
 }
 
 function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dataArray) {
-	//console.log(dataArray[0]);
-    let labels = [];
-    var dateFormat = 'DD/MM/YYYY'; 
-    for(var i in dates){
-        var splitedData = dates[i].split(' ');
-        labels.push(moment(splitedData[0], dateFormat));
-	}
+	/*let labels = [];
+	for (var i in dates) {
+		labels.push(new Date(dates[i]));
+	}*/
     new Chart(document.getElementById(canvasName), {
       type: 'line',
       data: {
-        labels: labels,
+        labels: dates,
         datasets: [
 			{
 					data: dataArray[0],
@@ -79,17 +76,14 @@ function createCurrencySaleGraph(canvasName, currencyName, bankNames, dates, dat
 
 
 function createCurrencyPurchaseGraph(canvasName, currencyName, bankNames, dates, dataArray) {
-	//console.log(dataArray);
-	let labels = [];
-    var dateFormat = 'DD/MM/YYYY'; 
+	/*let labels = [];
     for(var i in dates){
-        var splitedData = dates[i].split(' ');
-        labels.push(moment(splitedData[0], dateFormat));
-    }
+        labels.push(new Date(dates[i]));
+    }*/
     new Chart(document.getElementById(canvasName), {
       type: 'line',
 		data: {
-			labels: labels,
+			labels: dates,
             datasets: [
 				{
 					data: dataArray[0],
@@ -168,7 +162,6 @@ function exportTable(){
     
     // Specify file name
     filename = elements[0].innerHTML +"-"+ elements[1].innerHTML;
-    console.log(filename);
     filename = filename?filename+'.xls':'excel_data.xls';
     
     // Create download link element
@@ -190,5 +183,23 @@ function exportTable(){
         
         //triggering the function
         downloadLink.click();
+    }
+}
+
+function displayRow(id) {
+	var row = document.getElementById(id);
+    if (row.style.display == 'none') {
+        row.style.display = 'table-row';
+    } else {
+        row.style.display = 'none';
+    }
+}
+
+function hideDiv(hideClassName, showClassName) {
+    var hideDivs = document.getElementsByClassName(hideClassName);
+    var showDivs = document.getElementsByClassName(showClassName);
+    for(var i = 0; i < hideDivs.length; i++){
+        hideDivs[i].style.display = "none";
+        showDivs[i].style.display = "block";
     }
 }

@@ -9,6 +9,7 @@ namespace STIProkoratKrausnerBroz.Models
         public double purchaseVal { get; set; }
         public double centerVal { get; set; }
         public double saleVal { get; set; }
+        public double CorrelationCoeficient { get; set; }
 
         public Bank(string name, double purchase, double sale, double center)
         {
@@ -16,6 +17,7 @@ namespace STIProkoratKrausnerBroz.Models
             this.purchaseVal = purchase;
             this.centerVal = center;
             this.saleVal = sale;
+            this.CorrelationCoeficient = 0;
 
         }
     }

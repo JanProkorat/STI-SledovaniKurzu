@@ -16,25 +16,56 @@ namespace STIProkoratKrausnerBroz.Models
     {
 
         public List<Currency> Currencies { get; set; }
-
         public string[] MonitoredCurrencies { get; set; }
+        public List<Deal> BestDeals { get; set; }
 
-        public ToolsClass()
-        {
+        public ToolsClass(){
             Currencies = new List<Currency>();
             MonitoredCurrencies = new string[] { "AUD", "DKK", "EUR", "HRK", "CAD", "HUF",
                 "NOK", "PLN", "RON", "RUB", "SEK", "CHF", "JPY", "USD", "GBP"};
+            BestDeals = new List<Deal>();
+
+        }
+
+        public void calculateBestDeals(){
+            foreach(Currency cur in Currencies){
+                Deal deal = new Deal();
+                deal.Country = cur.State;
+                deal.CurrencyName = cur.Name;
+                Date date = cur.Dates.Find(d => d.date == cur.Dates.Max(Date => Date.date));
+                Bank cnb = date.Banks.Find(bank => bank.name.ToUpper() == "CNB");
+                for(int i = 0; i < date.Banks.Count - 1; i++) {
+                    if ((Math.Abs(date.Banks[i].saleVal - cnb.saleVal) > deal.BestSale) && date.Banks[i].name.ToUpper() != "CNB"){
+                        deal.BestSale = date.Banks[i].saleVal;
+                        deal.BestSaleBank = date.Banks[i].name;
+                    }
+                    if ((Math.Abs(date.Banks[i].purchaseVal - cnb.purchaseVal) < deal.BestBuy) && date.Banks[i].name.ToUpper() != "CNB"){
+                        deal.BestBuy = date.Banks[i].purchaseVal;
+                        deal.BestBuyBank = date.Banks[i].name;
+                    }
+                }
+                if (cur.Dates.Count == 1){
+                    deal.Recommendation = "Nedostatek dat";
+                }else{
+                    if (cur.Dates[cur.Dates.Count - 1].Banks.Find(Bank => Bank.name.ToLower() == "cnb").saleVal <=
+                        cur.Dates[cur.Dates.Count - 2].Banks.Find(Bank => Bank.name.ToLower() == "cnb").saleVal){
+                        deal.Recommendation = "Kupuj";
+                    }else {
+                        deal.Recommendation = "Prodej";
+                    }
+                }
+                BestDeals.Add(deal);
+            }
         }
 
         public Boolean testVersion(double versionProg)
         {
             string url = "https://github.com/JanProkorat/STI-KontrolaVerze/blob/master/version.txt";
-            if (!this.testUrlReachable(url))
-            {
+            if (!this.testUrlReachable(url)){
                 return true;
             }
             String tmp = parseVersion(getHTML(url));
-            double versionWeb = Convert.ToDouble(tmp.Replace(".",","));
+            double versionWeb = formatPlatform(tmp);
             return versionProg == versionWeb;
         }
 
@@ -51,11 +82,19 @@ namespace STIProkoratKrausnerBroz.Models
 
         internal void sortCurrencies()
         {
-            List<Currency> tmp = Currencies.OrderBy(Currency => Currency.state).ToList();
+            List<Currency> tmp = Currencies.OrderBy(Currency => Currency.State).ToList();
             Currencies.Clear();
-            for (int i = tmp.Count - 1; i >= 0; i--)
-            {
+            for (int i = tmp.Count - 1; i >= 0; i--){
                 Currencies.Add(tmp[i]);
+            }
+        }
+
+        internal void sortBestDeals()
+        {
+            List<Deal> tmp = BestDeals.OrderBy(Deal=> Deal.Country).ToList();
+            BestDeals.Clear();
+            for (int i = 0; i < tmp.Count; i++){
+                BestDeals.Add(tmp[i]);
             }
         }
 
@@ -96,53 +135,107 @@ namespace STIProkoratKrausnerBroz.Models
                     break;
             }
             tmpUrl = tmpUrl + dat.ToString("dd.MM.yyyy") + "/";
-            Console.WriteLine("");
             return tmpUrl;
 
         }
 
-        internal void createCurrency(string folderPath)
-        {
-            foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt"))
-            {
-                if(file != "tmp_files/last.txt")
-                {
-
+        internal void createCurrency(string folderPath){
+            foreach (string file in Directory.EnumerateFiles(folderPath, "*.txt")){
+                if(file != "tmp_files/last.txt"){
                     List<string> lines = File.ReadAllLines(file).ToList();
                     string[] tmp = Regex.Split(file, @"\D+");
                     DateTime myDate = DateTime.ParseExact(tmp[1] + "." + tmp[2] + "." + tmp[3], "dd.MM.yyyy", CultureInfo.InvariantCulture);
                     string bankName = "";
                     DataTable table = new DataTable();
-                    if (file.Contains("cnb"))
-                    {
+                    if (file.Contains("cnb")){
                         bankName = "cnb";
                         createTable(table, lines, '|', 1);
-                    }
-                    else if (!file.Contains("last"))
-                    {
+                    }else if (!file.Contains("last")){
                         bankName = lines[0].Split(" ")[1];
                         createTable(table, lines, ';', 1);
                     }
                     loadCurrenciesToList(table);
-                    foreach (Currency curr in Currencies)
-                    {
+                    foreach (Currency curr in Currencies){
                         if (!curr.Dates.Any(Date => Date.date.Day == myDate.Day &&
-                            Date.date.Month == myDate.Month && Date.date.Year == myDate.Year))
-                        {
+                            Date.date.Month == myDate.Month && Date.date.Year == myDate.Year)){
                             curr.Dates.Add(new Date(myDate));
                         }
                     }
                     loadBanksToDates(table, bankName, myDate);
                 }
-
             }
-
         }
 
+        public void calculateCorrelationCoeficient(){
+            foreach (Currency cur in Currencies){
+                foreach (Bank b in cur.Dates[0].Banks){
+                    if(b.name.ToUpper() == "CS"){
+                        b.CorrelationCoeficient = countCorrelationCoeficient(cur.Name, "CS", countAvarage("CS"));
+                    }
+                    if (b.name.ToUpper() == "CSOB"){
+                        b.CorrelationCoeficient = countCorrelationCoeficient(cur.Name, "CSOB", countAvarage("CSOB"));
+                    }
+                    if (b.name.ToUpper() == "KB"){
+                        b.CorrelationCoeficient = countCorrelationCoeficient(cur.Name, "KB", countAvarage("KB"));
+                    }
+                    if (b.name.ToUpper() == "RB"){
+                        b.CorrelationCoeficient = countCorrelationCoeficient(cur.Name, "RB", countAvarage("RB"));
+                    }
+                }
+            }
+        }
+
+        private double countCorrelationCoeficient(string currName, string bankName, double avarage){
+            double sumUpper = 0, sumLowerX = 0, sumLowerY = 0;
+            double avarageCNB = countAvarage("CNB");
+            foreach (Currency cur in Currencies){
+                if(cur.Name == currName){
+                    for(int i = 0; i < cur.Dates.Count - 1; i++) { 
+                        for(int j = 0; j < cur.Dates[i].Banks.Count-1; j++) {
+                            Bank cnb = cur.Dates[i].Banks.Find(Bank => Bank.name.ToUpper() == "CNB");
+                            if (cur.Dates[i].Banks[j].name.ToUpper() == bankName){
+                                sumUpper += (cur.Dates[i].Banks[j].purchaseVal - avarage) * (cnb.saleVal - avarageCNB);
+                                sumLowerX += Math.Pow((cur.Dates[i].Banks[j].purchaseVal - avarage),2);
+                                sumLowerY += Math.Pow((cnb.saleVal - avarageCNB),2);
+                            }
+                        }
+                    }
+                }else{
+                    continue;
+                }
+            }
+            return sumUpper / Math.Sqrt(sumLowerX * sumLowerY);
+        }
+
+        private double countAvarage(string bankName){
+            double result = 0;
+            foreach (Currency cur in Currencies){
+                foreach (Date date in cur.Dates){
+                    foreach (Bank b in date.Banks){
+                        if (b.name.ToUpper() == bankName){
+                            result += b.saleVal;
+                        }
+                        if (b.name.ToUpper() == bankName){
+                            result += b.purchaseVal;
+                        }
+                        if (b.name.ToUpper() == bankName){
+                            result += b.purchaseVal;
+                        }
+                        if (b.name.ToUpper() == bankName){
+                            result += b.purchaseVal;
+                        }
+                        if (b.name.ToUpper() == bankName){
+                            result += b.purchaseVal;
+                        }
+                    }
+                }
+            }
+            return result / Currencies[0].Dates.Count;
+        }
         private void loadBanksToDates(DataTable table, String bankName, DateTime localDate){
             foreach(DataRow row in table.Rows){
                 foreach(Currency curr in Currencies){
-                    if(curr.name == row["kód"].ToString()){
+                    if(curr.Name == row["kód"].ToString()){
                         if (bankName == "cnb"){
                             curr.Dates.Find(Date => Date.date == localDate).
                             createBank(bankName, 0, formatPlatform(row["kurz"].ToString()), 0);
@@ -161,7 +254,7 @@ namespace STIProkoratKrausnerBroz.Models
         {
             foreach (DataRow row in table.Rows)
             {
-                if (!Currencies.Any(Currency => Currency.name == row["kód"].ToString()) && 
+                if (!Currencies.Any(Currency => Currency.Name == row["kód"].ToString()) && 
                     MonitoredCurrencies.Contains(row["kód"].ToString())){
                     Currencies.Add(new Currency(row["kód"].ToString(), row["země"].ToString()));
                 }
