@@ -123,8 +123,9 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
             {
                 ViewBag.versionMsg = "";
             }else{
-                ViewBag.versionMsg = "Stahnete si novou verzi programu! Odkaz pro stažení nové verze: https://github.com/JanProkorat/STI-SledovaniKurzu/tree/master/STI-Prokorat-Krausner-Broz%20-%20completed";
-            }
+				ViewBag.versionMsg = "<a target="+"_blank" +" rel="+"noopener noreferrer" +" href=" + "https://github.com/JanProkorat/STI-SledovaniKurzu/tree/master/STI-Prokorat-Krausner-Broz%20-%20completed"+">Dostupná nová verze programu! Pro stažení knikněte zde </a>";
+
+			}
         }
 
     }

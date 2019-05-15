@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="3600; URL=http://localhost:5000">
+    <meta http-equiv="refresh" content="10800">
     <title>@ViewData["Title"] - STI_Prokorat_Krausner_Broz</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
@@ -13,7 +13,7 @@
     <body>
         <section>
             <header>
-                <h3>@ViewBag.versionMsg</h3>
+				<h3>@Html.Raw(ViewBag.versionMsg)</h3>
             </header>
             <div class="container body-content">
                 <div id="mySidenav" class="sidenav">

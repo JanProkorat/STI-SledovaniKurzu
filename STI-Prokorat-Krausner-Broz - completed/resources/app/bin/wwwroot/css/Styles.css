@@ -3,8 +3,9 @@
 header{
     text-align:center;
 }
-.graphCanvasDiv{
-    width: 45%;
+.graphCanvasDiv {
+	width: 45%;
+	float: right;
 }
 
 .sidenav {
@@ -161,10 +162,10 @@ th {
     border-radius: 50%;
     background: white;
 }
-#leftDiv, #rightDiv {
+/*#leftDiv, #rightDiv {
     float: left;
     width: 45%;
-}
+}*/
 .rowDiv {
 	display: flex;
 	margin:auto;
@@ -179,3 +180,18 @@ th {
 	margin: auto;
 	width: 50%;
 }
+.checkBoxDiv2 {
+	width: 10%;
+}
+.content, .graphSection {
+	display: flex;
+}
+
+.graphDiv{
+	width:100%;
+	padding-left:30px;
+}
+.rowCanvasDiv {
+	text-align:center;
+}
+
