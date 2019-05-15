@@ -15,7 +15,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
     {
         private ToolsClass t = new ToolsClass();
         Timer timer = null;
-        double Version = 1.2;
+        double Version = 2.4;
         //Timer timerTest = null;
         int i = 0;
 
@@ -118,11 +118,12 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
 
         private void testVersion()
         {
+            Boolean tmpBool = t.testVersion(Version);
             if (t.testVersion(Version))
             {
-                ViewBag.versionMsg = "Stahnete si novou verzi programu!";
-            }else{
                 ViewBag.versionMsg = "";
+            }else{
+                ViewBag.versionMsg = "Stahnete si novou verzi programu! Odkaz pro stažení nové verze: https://github.com/JanProkorat/STI-SledovaniKurzu/tree/master/STI-Prokorat-Krausner-Broz%20-%20completed";
             }
         }
 

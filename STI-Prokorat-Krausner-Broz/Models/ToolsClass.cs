@@ -391,7 +391,7 @@ namespace STIProkoratKrausnerBroz.Models
             {
                 return true;
             }
-            else if (time > 18.05)
+            else if (time > 15.10)
             {
                 return false;
             }
