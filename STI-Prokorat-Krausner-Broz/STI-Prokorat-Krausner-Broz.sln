@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STI-Prokorat-Krausner-Broz", "STI-Prokorat-Krausner-Broz\STI-Prokorat-Krausner-Broz.csproj", "{78DDD72E-BE26-4117-B366-44DA623AC37F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STI-Prokorat-Krausner-Broz", "STI-Prokorat-Krausner-Broz.csproj", "{9E182A11-0289-446E-A3C8-BB800EBBDE68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,9 +9,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78DDD72E-BE26-4117-B366-44DA623AC37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78DDD72E-BE26-4117-B366-44DA623AC37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78DDD72E-BE26-4117-B366-44DA623AC37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78DDD72E-BE26-4117-B366-44DA623AC37F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E182A11-0289-446E-A3C8-BB800EBBDE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E182A11-0289-446E-A3C8-BB800EBBDE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E182A11-0289-446E-A3C8-BB800EBBDE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E182A11-0289-446E-A3C8-BB800EBBDE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
