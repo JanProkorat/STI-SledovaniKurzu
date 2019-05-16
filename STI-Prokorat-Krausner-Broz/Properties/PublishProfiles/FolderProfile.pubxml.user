@@ -6,6 +6,6 @@ Tento soubor je používán procesem publikování nebo balení webového projek
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\proko\Desktop\STI-Prokorat-Krausner-Broz\STI-Prokorat-Krausner-Broz - completed</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\proko\Desktop\STI-SledovaniKurzu-master\STI-Prokorat-Krausner-Broz\bin\Release\netcoreapp2.2\publish\</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

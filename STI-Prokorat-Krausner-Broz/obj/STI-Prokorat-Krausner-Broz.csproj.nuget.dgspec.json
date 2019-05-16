@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\proko\\Documents\\Gitlab tul\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {}
+    "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {}
   },
   "projects": {
-    "C:\\Users\\proko\\Documents\\Gitlab tul\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {
+    "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\proko\\Documents\\Gitlab tul\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+        "projectUniqueName": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
         "projectName": "STI-Prokorat-Krausner-Broz",
-        "projectPath": "C:\\Users\\proko\\Documents\\Gitlab tul\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+        "projectPath": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
         "packagesPath": "C:\\Users\\proko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\proko\\Documents\\Gitlab tul\\STI-SledovaniKurzu\\STI-Prokorat-Krausner-Broz\\obj\\",
+        "outputPath": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

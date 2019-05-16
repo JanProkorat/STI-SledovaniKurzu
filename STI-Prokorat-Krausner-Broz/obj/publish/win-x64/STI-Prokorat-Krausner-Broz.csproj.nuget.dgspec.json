@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\proko\\Desktop\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {}
+    "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {}
   },
   "projects": {
-    "C:\\Users\\proko\\Desktop\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {
+    "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\proko\\Desktop\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+        "projectUniqueName": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
         "projectName": "STI-Prokorat-Krausner-Broz",
-        "projectPath": "C:\\Users\\proko\\Desktop\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+        "projectPath": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
         "packagesPath": "C:\\Users\\proko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\proko\\Desktop\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz\\obj\\publish\\win-x64\\",
+        "outputPath": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\obj\\publish\\win-x64\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -22,7 +22,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.1"
+          "netcoreapp2.2"
         ],
         "sources": {
           "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
@@ -30,7 +30,7 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.1": {
+          "netcoreapp2.2": {
             "projectReferences": {}
           }
         },
@@ -41,7 +41,7 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.1": {
+        "netcoreapp2.2": {
           "dependencies": {
             "ElectronNET.API": {
               "target": "Package",
@@ -50,19 +50,23 @@
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.10, )",
+              "version": "[2.2.4, )",
               "autoReferenced": true
             },
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[2.2.0, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.10, )",
+              "version": "[2.2.4, )",
               "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.BrowserLink": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "System.Text.Encoding.CodePages": {
               "target": "Package",
