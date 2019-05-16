@@ -6,81 +6,81 @@
 	ViewData["Title"] = "Kraušner, Prokorát, Brož";
 }
 <section class="content">
-	<div class="checkboxDiv2">
+	<div class="checkboxDiv2" id="bankRowDiv">
 		<h1>Vyber měnu:</h1>
 		<label class="container">
 			Americký dolar
-			<input type="checkbox" checked="checked" onclick="displayRow('USD')">
+			<input type="checkbox" id="usd" onclick="displayRow('USD')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Australský dolar
-			<input type="checkbox" onclick="displayRow('AUD')">
+			<input type="checkbox" id="aud" onclick="displayRow('AUD')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Britská libra
-			<input type="checkbox" checked="checked" onclick="displayRow('GBP')">
+			<input type="checkbox" id="gbp" onclick="displayRow('GBP')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Chorvatská kuna
-			<input type="checkbox" onclick="displayRow('HRK')">
+			<input type="checkbox" id="hrk" onclick="displayRow('HRK')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Dánská koruna
-			<input type="checkbox" onclick="displayRow('DKK')">
+			<input type="checkbox" id="dkk" onclick="displayRow('DKK')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Euro
-			<input type="checkbox" checked="checked" onclick="displayRow('EUR')">
+			<input type="checkbox" id="eur" onclick="displayRow('EUR')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Japonský jen
-			<input type="checkbox" onclick="displayRow('JPY')">
+			<input type="checkbox" id="jpy" onclick="displayRow('JPY')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Kanadský dolar
-			<input type="checkbox" onclick="displayRow('CAD')">
+			<input type="checkbox" id="cad" onclick="displayRow('CAD')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Maďarský forint
-			<input type="checkbox" onclick="displayRow('HUF')">
+			<input type="checkbox" id="huf" onclick="displayRow('HUF')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Norská koruna
-			<input type="checkbox" onclick="displayRow('NOK')">
+			<input type="checkbox" id="nok" onclick="displayRow('NOK')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Polský zlotý
-			<input type="checkbox" onclick="displayRow('PLN')">
+			<input type="checkbox" id="pln" onclick="displayRow('PLN')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Rumunský nový lei
-			<input type="checkbox" onclick="displayRow('RON')">
+			<input type="checkbox" id="ron" onclick="displayRow('RON')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Ruský rubl
-			<input type="checkbox" onclick="displayRow('RUB')">
+			<input type="checkbox" id="rub" onclick="displayRow('RUB')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Švédská koruna
-			<input type="checkbox" onclick="displayRow('SEK')">
+			<input type="checkbox" id="sek" onclick="displayRow('SEK')">
 			<span class="checkmark"></span>
 		</label>
 		<label class="container">
 			Švýcarský frank
-			<input type="checkbox" onclick="displayRow('CHF')">
+			<input type="checkbox" id="chf" onclick="displayRow('CHF')">
 			<span class="checkmark"></span>
 		</label>
 	</div>
@@ -120,6 +120,22 @@
 </section>
 
 <script type="text/javascript">
-		displayRow('USD');
-	displayRow('GBP');
-	displayRow('EUR');</script>
+    var bankCheckboxValues = JSON.parse(localStorage.getItem('bankCheckboxValues')) || {};
+    var $bankCheckboxes = $("#bankRowDiv :checkbox");
+    $bankCheckboxes.on("change", function () {
+        $bankCheckboxes.each(function () {
+            bankCheckboxValues[this.id] = this.checked;
+        });
+        localStorage.setItem("bankCheckboxValues", JSON.stringify(bankCheckboxValues));
+    });
+
+    $.each(bankCheckboxValues, function (key, value) {
+        $("#" + key).prop('checked', value);
+    });
+
+    var bankBoxes = $("#bankRowDiv :checkbox");
+    for (var i = 0; i < bankBoxes.length; i++) {
+        if (bankBoxes[i].checked == true) {
+            displayRow(bankBoxes[i].id.toUpperCase());
+        }
+    }</script>

@@ -6,30 +6,30 @@
     ViewData["Title"] = "Kraušner, Prokorát, Brož";
 }
 
-<div class="checkBoxDiv">
+<div class="checkBoxDiv" id="tablePickDiv">
     <label class="container" id="rbLabel">
         RB
-        <input type="radio" name="radio" id="rbRadio" onclick="showTable('rbTableDiv')">
+        <input type="radio" name="radio" id="rb" onclick="showTable('rbTableDiv')">
         <span class="checkmark"></span>
     </label>
     <label class="container" id="csLabel">
         ČS
-        <input type="radio" name="radio" id="csRadio" onclick="showTable('csTableDiv')">
+        <input type="radio" name="radio" id="cs" onclick="showTable('csTableDiv')">
         <span class="checkmark"></span>
     </label>
     <label class="container" id="csobLabel">
         ČSOB
-        <input type="radio" name="radio" id="csobRadio" onclick="showTable('csobTableDiv')">
+        <input type="radio" name="radio" id="csob" onclick="showTable('csobTableDiv')">
         <span class="checkmark"></span>
     </label>
     <label class="container" id="kbLabel">
         KB
-        <input type="radio" name="radio" id="kbRadio" onclick="showTable('kbTableDiv')">
+        <input type="radio" name="radio" id="kb" onclick="showTable('kbTableDiv')">
         <span class="checkmark"></span>
     </label>
     <label class="container" id="cnbLabel">
         ČNB
-        <input type="radio" name="radio" checked="checked" id="cnbRadio" onclick="showTable('cnbTableDiv')">
+        <input type="radio" name="radio" checked="checked" id="cnb" onclick="showTable('cnbTableDiv')">
         <span class="checkmark"></span>
     </label>
 </div>
@@ -184,4 +184,25 @@
     </table>
 </div>
 
-<script>showTable('cnbTableDiv');</script>
+<script type="text/javascript">
+
+    var timeCheckboxValues = JSON.parse(localStorage.getItem('timeCheckboxValues')) || {};
+    var $timecheckboxes = $("#tablePickDiv :radio");
+    $timecheckboxes.on("change", function () {
+        $timecheckboxes.each(function () {
+            timeCheckboxValues[this.id] = this.checked;
+        });
+        localStorage.setItem("timeCheckboxValues", JSON.stringify(timeCheckboxValues));
+    });
+
+    $.each(timeCheckboxValues, function (key, value) {
+        $("#" + key).prop('checked', value);
+    });
+
+    var timeBoxes = $("#tablePickDiv :radio");
+    for (var i = 0; i < timeBoxes.length; i++) {
+        if (timeBoxes[i].checked == true) {
+            showTable(timeBoxes[i].id + 'TableDiv');
+        }
+    }
+</script>

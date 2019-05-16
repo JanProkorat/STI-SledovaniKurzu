@@ -5,7 +5,7 @@
 	ViewData["Title"] = "Kraušner, Prokorát, Brož";
 }
 <section class="timeChoiceSection">
-	<div class="checkBoxDiv">
+	<div class="checkBoxDiv" id="timeCheckBoxDiv">
 		<label class="container" id="weekLabel">
 			Týden
 			<input type="radio" name="radio" id="weekRadio" onclick="hideDiv('monthCanvas', 'weekCanvas')">
@@ -13,91 +13,121 @@
 		</label>
 		<label class="container" id="monthLabel">
 			Měsíc
-			<input type="radio" name="radio" id="monthRadio" checked="checked" onclick="hideDiv('weekCanvas', 'monthCanvas')">
+			<input type="radio" name="radio" id="monthRadio" onclick="hideDiv('weekCanvas', 'monthCanvas')">
 			<span class="checkmark"></span>
 		</label>
 	</div>
 </section>
 <section class="content">
-	<div class="checkBoxDiv2">
+	<div class="checkBoxDiv2" id="currencyCheckBoxDiv">
 		<h1>Vyber měnu:</h1>
-		<label class="container">
-			Americký dolar
-			<input type="checkbox" checked="checked" onclick="displayGraphRow('usdRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Australský dolar
-			<input type="checkbox" onclick="displayGraphRow('audRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Britská libra
-			<input type="checkbox" checked="checked" onclick="displayGraphRow('gbpRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Chorvatská kuna
-			<input type="checkbox" onclick="displayGraphRow('hrkRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Dánská koruna
-			<input type="checkbox" onclick="displayGraphRow('dkkRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Euro
-			<input type="checkbox" checked="checked" onclick="displayGraphRow('eurRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Japonský jen
-			<input type="checkbox" onclick="displayGraphRow('jpyRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Kanadský dolar
-			<input type="checkbox" onclick="displayGraphRow('cadRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Maďarský forint
-			<input type="checkbox" onclick="displayGraphRow('hufRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Norská koruna
-			<input type="checkbox" onclick="displayGraphRow('nokRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Polský zlotý
-			<input type="checkbox" onclick="displayGraphRow('plnRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Rumunský nový lei
-			<input type="checkbox" onclick="displayGraphRow('ronRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Ruský rubl
-			<input type="checkbox" onclick="displayGraphRow('rubRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Švédská koruna
-			<input type="checkbox" onclick="displayGraphRow('sekRow')">
-			<span class="checkmark"></span>
-		</label>
-		<label class="container">
-			Švýcarský frank
-			<input type="checkbox" onclick="displayGraphRow('chfRow')">
-			<span class="checkmark"></span>
-		</label>
+        <div>
+            <label class="container">
+                Americký dolar
+                <input type="checkbox" id="usd" onclick="displayGraphRow('usdRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Australský dolar
+                <input type="checkbox" id="aud" onclick="displayGraphRow('audRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Britská libra
+                <input type="checkbox" id="gbp" onclick="displayGraphRow('gbpRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Chorvatská kuna
+                <input type="checkbox" id="hrk" onclick="displayGraphRow('hrkRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Dánská koruna
+                <input type="checkbox" id="dkk" onclick="displayGraphRow('dkkRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Euro
+                <input type="checkbox" id="eur" onclick="displayGraphRow('eurRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Japonský jen
+                <input type="checkbox" id="jpy" onclick="displayGraphRow('jpyRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Kanadský dolar
+                <input type="checkbox" id="cad" onclick="displayGraphRow('cadRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Maďarský forint
+                <input type="checkbox" id="huf" onclick="displayGraphRow('hufRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Norská koruna
+                <input type="checkbox" id="nok" onclick="displayGraphRow('nokRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Polský zlotý
+                <input type="checkbox" id="pln" onclick="displayGraphRow('plnRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Rumunský nový lei
+                <input type="checkbox" id="ron" onclick="displayGraphRow('ronRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Ruský rubl
+                <input type="checkbox" id="rub" onclick="displayGraphRow('rubRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Švédská koruna
+                <input type="checkbox" id="sek" onclick="displayGraphRow('sekRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div>
+            <label class="container">
+                Švýcarský frank
+                <input type="checkbox" id="chf" onclick="displayGraphRow('chfRow')">
+                <span class="checkmark"></span>
+            </label>
+        </div>
 	</div>
-	<div class="graphDiv">
+	<div class="graphDiv" id="graphDiv">
 		<div class="rowCanvasDiv" id="usdRow">
 			<div class="graphCanvasDiv">
 				<canvas class="weekCanvas" id="usd-week-purchase-canvas"></canvas>
@@ -419,8 +449,50 @@
 		}
 	}
 	hideGraphs();
-	hideDiv('weekCanvas', 'monthCanvas');
-	displayGraphRow('gbpRow');
-	displayGraphRow('usdRow');
-	displayGraphRow('eurRow');
+    //localStorage.clear();
+    // horní
+    var timeCheckboxValues = JSON.parse(localStorage.getItem('timeCheckboxValues')) || {};
+    var $timecheckboxes = $("#timeCheckBoxDiv :radio");
+    $timecheckboxes.on("change", function(){
+        $timecheckboxes.each(function(){
+            timeCheckboxValues[this.id] = this.checked;
+        });
+        localStorage.setItem("timeCheckboxValues", JSON.stringify(timeCheckboxValues));
+    });
+
+    $.each(timeCheckboxValues, function(key, value) {
+        $("#" + key).prop('checked', value);
+    });
+
+    var timeBoxes = $("#timeCheckBoxDiv :radio");
+    for(var i = 0; i < timeBoxes.length; i++){
+        if(timeBoxes[i].checked == true){
+            if(timeBoxes[i].id == "weekRadio"){
+                hideDiv('monthCanvas', 'weekCanvas');
+            }else{
+                hideDiv('weekCanvas', 'monthCanvas');
+            }
+        }
+    }
+
+    //boční
+    var graphCheckboxValues = JSON.parse(localStorage.getItem('graphCheckboxValues')) || {};
+    var $graphcheckboxes = $("#currencyCheckBoxDiv :checkbox");
+    $graphcheckboxes.on("change", function(){
+        $graphcheckboxes.each(function(){
+            graphCheckboxValues[this.id] = this.checked;
+        });
+        localStorage.setItem("graphCheckboxValues", JSON.stringify(graphCheckboxValues));
+    });
+
+    $.each(graphCheckboxValues, function(key, value) {
+        $("#" + key).prop('checked', value);
+    });
+
+    var graphBoxes = $("#currencyCheckBoxDiv :checkbox");
+    for(var i = 0; i < graphBoxes.length; i++){
+        if(graphBoxes[i].checked == true){
+            displayGraphRow(graphBoxes[i].id+'Row');
+        }
+    }
 </script>
