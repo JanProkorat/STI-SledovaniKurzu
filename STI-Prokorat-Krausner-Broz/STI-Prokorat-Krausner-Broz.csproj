@@ -3,10 +3,10 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ElectronNET.API" Version="0.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.App">
+      <Version>2.2.5</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
   </ItemGroup>
   <ItemGroup>
@@ -21,10 +21,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\js\moment.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="electron.manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 </Project>

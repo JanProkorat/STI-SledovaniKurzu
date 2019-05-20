@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ElectronNET.API;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +19,6 @@ namespace STI_Prokorat_Krausner_Broz
 
         public static IWebHost WebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseElectron(args)
                 .UseStartup<Startup>()
                 .Build();
     }

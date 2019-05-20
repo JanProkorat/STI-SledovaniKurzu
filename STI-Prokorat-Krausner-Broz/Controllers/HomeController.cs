@@ -15,7 +15,7 @@ namespace STI_Prokorat_Krausner_Broz.Controllers
     {
         private ToolsClass t = new ToolsClass();
         Timer timer = null;
-        double Version = 2.4;
+        double Version = 2.5;
         //Timer timerTest = null;
         int i = 0;
 

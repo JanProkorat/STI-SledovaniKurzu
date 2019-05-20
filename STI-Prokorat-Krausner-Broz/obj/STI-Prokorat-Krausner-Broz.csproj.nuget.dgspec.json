@@ -1,31 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {}
+    "C:\\Users\\KraukyMan\\Desktop\\STI\\New\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {}
   },
   "projects": {
-    "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {
+    "C:\\Users\\KraukyMan\\Desktop\\STI\\New\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+        "projectUniqueName": "C:\\Users\\KraukyMan\\Desktop\\STI\\New\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
         "projectName": "STI-Prokorat-Krausner-Broz",
-        "projectPath": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
-        "packagesPath": "C:\\Users\\proko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\proko\\Desktop\\STI-SledovaniKurzu-master\\STI-Prokorat-Krausner-Broz\\obj\\",
+        "projectPath": "C:\\Users\\KraukyMan\\Desktop\\STI\\New\\STI-Prokorat-Krausner-Broz\\STI-Prokorat-Krausner-Broz.csproj",
+        "packagesPath": "C:\\Users\\KraukyMan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KraukyMan\\Desktop\\STI\\New\\STI-Prokorat-Krausner-Broz\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\proko\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Users\\KraukyMan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -43,15 +41,9 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
-            "ElectronNET.API": {
-              "target": "Package",
-              "version": "[0.0.11, )"
-            },
             "Microsoft.AspNetCore.App": {
-              "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.0, )",
-              "autoReferenced": true
+              "version": "[2.2.5, )"
             },
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
@@ -63,10 +55,6 @@
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
-            },
-            "Microsoft.VisualStudio.Web.BrowserLink": {
-              "target": "Package",
-              "version": "[2.2.0, )"
             },
             "System.Text.Encoding.CodePages": {
               "target": "Package",
