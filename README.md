@@ -1,2 +1,2 @@
 # STI-SledovaniKurzu
-STI - Školní projekt 
+Projekt webové MVC aplikace na platformě .NET Core ke sledování pohybu kurzů měn v čase. 
